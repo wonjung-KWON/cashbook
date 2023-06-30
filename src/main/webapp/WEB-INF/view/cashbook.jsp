@@ -9,5 +9,6 @@
 <body>
 	<h1>cashbook</h1>
 	<a href="${pageContext.request.contextPath}/logout">logout</a>
+	<a href="${pageContext.request.contextPath}/memberOne">회원정보</a>
 </body>
 </html>

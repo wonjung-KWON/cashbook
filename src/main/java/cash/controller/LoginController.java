@@ -17,7 +17,8 @@ public class LoginController extends HttpServlet {
 	@Override
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		//session 인증 검사 코드
-		if(request.getAttribute("loginMember") != null) {
+		HttpSession session = request.getSession();
+		if(session.getAttribute("loginMember") != null) {
 			response.sendRedirect(request.getContextPath()+"/cashbook");
 			return;
 		}
@@ -38,11 +39,12 @@ public class LoginController extends HttpServlet {
 			response.sendRedirect(request.getContextPath()+"/login");
 			return;
 		}
-		
+		String loginM = loginMember.getMemberId();
 		// 로그인 성공시 : session 사용
 		HttpSession session = request.getSession();
 		System.out.println("로그인 성공");
-		session.setAttribute("loginMember", loginMember);
+		System.out.println(loginMember);
+		session.setAttribute("loginMember", loginM);
 		response.sendRedirect(request.getContextPath()+"/cashbook");
 	}
 

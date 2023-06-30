@@ -16,7 +16,7 @@ public class CashbookController extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		//session 인증 검사 코드
 		HttpSession session = request.getSession();
-		if(request.getAttribute("loginMember") != null) {
+		if(session.getAttribute("loginMember") == null) {
 			response.sendRedirect(request.getContextPath()+"/login");
 			return;
 		}

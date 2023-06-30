@@ -19,7 +19,7 @@
 			</tr>
 		</table>
 		<button type="submit">로그인</button>
-		<a href="">회원가입</a>
+		<a href="${pageContext.request.contextPath}/AddMemberController">회원가입</a>
 	</form>
 </body>
 </html>
