@@ -12,7 +12,7 @@ import javax.servlet.http.HttpSession;
  * Servlet implementation class logoutController
  */
 @WebServlet("/logout")
-public class logoutController extends HttpServlet {
+public class LogoutController extends HttpServlet {
 
 	
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {

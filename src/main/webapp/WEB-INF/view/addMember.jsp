@@ -48,11 +48,13 @@
 		<p>아이디</p>
 		<p><span id="idMsg" class="msg"></span></p>
 		<input type="text" name="memberId" placeholder="아이디" id="id">
+		<br>
 		<p>비밀번호</p>
 		<p><span id="pwMsg" class="msg"></span></p>
 		<input type="password" name="memberPw" placeholder="비밀번호" id="pw">
 		<br><span id="clickMsg" class="msg"></span>
-		<button type="button" id="signinBtn">로그인</button>
+		<br>
+		<button type="button" id="signinBtn">회원가입</button>
 	</form>
 </body>
 </html>
