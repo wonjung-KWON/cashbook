@@ -28,5 +28,16 @@
 			</tr>
 	</c:forEach>
 		</table>
+		<div>
+			<c:if test="${startPage > 5}">
+				<a href="${pageContext.request.contextPath}/hashtagList?currentPage=${startPage-1}&word=${word}">이전</a>
+			</c:if>
+			<c:forEach var="i" begin="${startPage}" end="${endPage}" step="1">
+				<a href="${pageContext.request.contextPath}/hashtagList?currentPage=${i}&word=${word}">${i}</a>
+			</c:forEach>
+			<c:if test="${endPage<lastPage}">
+				<a href="${pageContext.request.contextPath}/hashtagList?currentPage=${endPage+1}&word=${word}">다음</a>
+			</c:if>
+		</div>
 </body>
 </html>

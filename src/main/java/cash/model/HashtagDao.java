@@ -12,18 +12,52 @@ import java.util.Map;
 import cash.vo.Hashtag;
 
 public class HashtagDao {
-	public List<Map<String,Object>> AllHashtagList(String word, String memberId){
-		List<Map<String,Object>> list = new ArrayList<>();
+	// 해시태그 전체 행 구하기
+	public int CountHashtagList(String word, String memberId) {
+		int row = 0;
 		Connection conn = null;
 		PreparedStatement stmt = null;
 		ResultSet rs = null;
-		String sql = "select c.cashbook_no cashbookNo, c.category category, c.cashbook_date cashbookDate, c.price price, c.memo memo, c.createdate createdate, c.updatedate updatedate, h.word word FROM hashtag h INNER JOIN cashbook c ON  h.cashbook_no = c.cashbook_no WHERE h.word = ? AND c.member_id = ? order by c.cashbook_no desc;";
+		String sql = "SELECT count(*) FROM hashtag h INNER JOIN cashbook c ON  h.cashbook_no = c.cashbook_no WHERE h.word = ? AND c.member_id = ? ";
 		try {
 			Class.forName("org.mariadb.jdbc.Driver");
 			conn = DriverManager.getConnection("jdbc:mariadb://127.0.0.1:3306/cash","root","java1234");
 			stmt = conn.prepareStatement(sql);
 			stmt.setString(1, word);
 			stmt.setString(2, memberId);
+			rs = stmt.executeQuery();
+			
+			if(rs.next()) {
+				row = rs.getInt("count(*)");
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			try {
+				rs.close();
+				stmt.close();
+				conn.close();
+			}catch (Exception e2) {
+				e2.printStackTrace();
+			}
+		}
+		return row;
+	}
+	//해시태그별 전체 구하는 쿼리
+	public List<Map<String,Object>> AllHashtagList(String word, String memberId, int beginRow, int rowPerPage){
+		List<Map<String,Object>> list = new ArrayList<>();
+		Connection conn = null;
+		PreparedStatement stmt = null;
+		ResultSet rs = null;
+		String sql = "SELECT c.cashbook_no cashbookNo, c.category category, c.cashbook_date cashbookDate, c.price price, c.memo memo, c.createdate createdate, c.updatedate updatedate, h.word word FROM hashtag h INNER JOIN cashbook c ON  h.cashbook_no = c.cashbook_no WHERE h.word = ? AND c.member_id = ? order by c.cashbook_no desc LIMIT ?, ?";
+		try {
+			Class.forName("org.mariadb.jdbc.Driver");
+			conn = DriverManager.getConnection("jdbc:mariadb://127.0.0.1:3306/cash","root","java1234");
+			stmt = conn.prepareStatement(sql);
+			stmt.setString(1, word);
+			stmt.setString(2, memberId);
+			stmt.setInt(3, beginRow);
+			stmt.setInt(4, rowPerPage);
 			rs = stmt.executeQuery();
 			while(rs.next()) {
 				Map<String,Object> m = new HashMap<String,Object>();
@@ -84,7 +118,7 @@ public class HashtagDao {
 		}
 		return list;
 	}
-	
+	//해시태그 추가하는 메서드
 	public int insertHashtag(Hashtag hashtag) {
 		int row = 0;
 		Connection conn =null;
