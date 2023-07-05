@@ -1,6 +1,9 @@
 package cash.controller;
 
 import java.io.IOException;
+import java.util.HashSet;
+import java.util.Set;
+
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -80,15 +83,23 @@ public class AddCashbookController extends HttpServlet {
 		String memo2 = cashbook.getMemo();
 		String memo3 = memo2.replace("#", " #"); // "#구디#아카데미" -> " #구디 #아카데미"
 		
+		Set<String> set = new HashSet<String>();
+		
 		for(String ht : memo3.split(" ")) {
+			if(ht.startsWith("#")) {
 			String ht2 = ht.replace("#", "");
 			if(ht2.length() > 0) {
+				set.add(ht2);
+		
+				}
+			}	
+		}
+			for(String s: set) {
 				Hashtag hashtag = new Hashtag();
 				hashtag.setCashbookNo(cashbookNo);
-				hashtag.setWord(ht2);
+				hashtag.setWord(s);
 				hashtagDao.insertHashtag(hashtag);
 			}
-		}
 		response.sendRedirect(request.getContextPath()+"/calendar");
 	}
 

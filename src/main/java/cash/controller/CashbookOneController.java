@@ -24,10 +24,26 @@ public class CashbookOneController extends HttpServlet {
 				return;
 			}
 			String memberId = (String) session.getAttribute("loginMember");
-			int targetYear = Integer.parseInt(request.getParameter("targetYear"));
-			int targetMonth = Integer.parseInt(request.getParameter("targetMonth"));
-			int targetDay = Integer.parseInt(request.getParameter("targetDay"));
 			
+			int targetYear = 0;
+			int targetMonth = 0;
+			int targetDay = 0;
+			String cashbookDate = null;
+			if(request.getParameter("cashbookDate") != null) {
+				cashbookDate = request.getParameter("cashbookDate");
+				targetYear = Integer.parseInt(cashbookDate.substring(0, 4));
+				targetMonth = Integer.parseInt(cashbookDate.substring(5, 7));
+				targetDay = Integer.parseInt(cashbookDate.substring(8, 10));
+				System.out.println(targetYear);
+				System.out.println(targetMonth);
+				targetMonth = targetMonth-1;
+				System.out.println(targetMonth);
+				System.out.println(targetDay);
+			}else {
+				targetYear = Integer.parseInt(request.getParameter("targetYear"));
+				targetMonth = Integer.parseInt(request.getParameter("targetMonth"));
+				targetDay = Integer.parseInt(request.getParameter("targetDay"));
+			}
 			List<Cashbook> list = new CashbookDao().selectCashbookOne(memberId, targetYear, targetMonth+1, targetDay);
 			request.setAttribute("list", list);
 			

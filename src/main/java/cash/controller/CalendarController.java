@@ -3,6 +3,7 @@ package cash.controller;
 import java.io.IOException;
 import java.util.Calendar;
 import java.util.List;
+import java.util.Map;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -13,6 +14,7 @@ import javax.servlet.http.HttpSession;
 import javax.websocket.Session;
 
 import cash.model.CashbookDao;
+import cash.model.HashtagDao;
 import cash.vo.Cashbook;
 
 
@@ -20,7 +22,6 @@ import cash.vo.Cashbook;
 public class CalendarController extends HttpServlet {
 	@Override
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// session 인증 검사
 		//session 인증 검사 코드
 				HttpSession session = request.getSession();
 				if(session.getAttribute("loginMember") == null) {
@@ -87,6 +88,8 @@ public class CalendarController extends HttpServlet {
 		// 모델을 호출(DAO 타켓 월의 수입/지출데이터
 		List<Cashbook> list = new CashbookDao().selectCashbookListByMonth(memberId, targetYear, targetMonth+1);
 		
+		List<Map<String,Object>> htList = new HashtagDao().selectWordCountByMonth(targetYear, targetMonth+1, memberId);
+		
 		// 뷰에 값넘기기 위해 request속성에 값 넘기기
 		request.setAttribute("targetYear", targetYear);
 		request.setAttribute("targetMonth", targetMonth);
@@ -99,6 +102,7 @@ public class CalendarController extends HttpServlet {
 		request.setAttribute("todayYear", todayYear);
 		request.setAttribute("preLastDate", preLastDate);
 		request.setAttribute("list", list);
+		request.setAttribute("htList", htList);
 		
 		//달력을 출력하는 뷰
 		request.getRequestDispatcher("WEB-INF/view/calendar.jsp").forward(request, response);
