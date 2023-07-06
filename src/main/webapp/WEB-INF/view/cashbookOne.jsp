@@ -30,6 +30,6 @@
 		</tr>
 	</c:forEach>
 </table>
-<a href="${pageContext.request.contextPath}/addCashbook?targetYear=${targetYear}&targetMonth=${targetMonth+1}&targetDay=${targetDay}">새로 추가</a>
+<a href="${pageContext.request.contextPath}/on/addCashbook?targetYear=${targetYear}&targetMonth=${targetMonth+1}&targetDay=${targetDay}">새로 추가</a>
 </body>
 </html>

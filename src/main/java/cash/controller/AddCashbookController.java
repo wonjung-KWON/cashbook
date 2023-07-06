@@ -16,16 +16,10 @@ import cash.model.HashtagDao;
 import cash.vo.Cashbook;
 import cash.vo.Hashtag;
 
-@WebServlet("/addCashbook")
+@WebServlet("/on/addCashbook")
 public class AddCashbookController extends HttpServlet {
 	@Override
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		//session유효성 검사
-		HttpSession session = request.getSession();
-		if(session.getAttribute("loginMember") == null) {
-			response.sendRedirect(request.getContextPath()+"/login");
-			return;
-		}
 		//request 매개값
 		int targetYear = Integer.parseInt(request.getParameter("targetYear"));
 		int targetMonth = Integer.parseInt(request.getParameter("targetMonth"));
@@ -43,7 +37,7 @@ public class AddCashbookController extends HttpServlet {
 		//session유효성 검사
 				HttpSession session = request.getSession();
 				if(session.getAttribute("loginMember") == null) {
-					response.sendRedirect(request.getContextPath()+"/login");
+					response.sendRedirect(request.getContextPath()+"/off/login");
 					return;
 				}	
 		//request 매개값
@@ -73,7 +67,7 @@ public class AddCashbookController extends HttpServlet {
 		//입력실패
 		if(cashbookNo  == 0) {
 			System.out.println("입력실패");
-			response.sendRedirect(request.getContextPath()+"/cashbook");
+			response.sendRedirect(request.getContextPath()+"/on/cashbook");
 			return;
 		}
 		//입력성공 -> 해시태그가 있다면 - > 해시태그를 추출 -> 해시태그를 입력(반복문활용)
@@ -100,7 +94,7 @@ public class AddCashbookController extends HttpServlet {
 				hashtag.setWord(s);
 				hashtagDao.insertHashtag(hashtag);
 			}
-		response.sendRedirect(request.getContextPath()+"/calendar");
+		response.sendRedirect(request.getContextPath()+"/on/calendar");
 	}
 
 }

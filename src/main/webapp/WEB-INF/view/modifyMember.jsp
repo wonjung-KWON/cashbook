@@ -42,7 +42,7 @@
 </head>
 <body>
 <h1>회원정보수정</h1>
-	<form action="${pageContext.request.contextPath}/modifyMember" method="post" id="modiForm">
+	<form action="${pageContext.request.contextPath}/on/modifyMember" method="post" id="modiForm">
 		변경전 비밀번호 입력 :<input id="checkPw" type="password" name="checkPw" placeholder="변경전 비밀번호">
 		변경할 비밀번호 입력 :<input id="memberPw" type="password" name="memberPw" placeholder="변경 비밀번호">
 		<p><span id="memberPwMsg" ></span></p>

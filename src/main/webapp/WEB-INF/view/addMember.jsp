@@ -8,7 +8,7 @@
 </head>
 <body>
 	<h1>회원가입</h1>
-	<form action="${pageContext.request.contextPath}/AddMemberController" method="post" id="singinForm">
+	<form action="${pageContext.request.contextPath}/off/AddMemberController" method="post" id="singinForm">
 		<p>아이디</p>
 		<p><span id="idMsg" class="msg"></span></p>
 		<input type="text" name="memberId" placeholder="아이디" id="id">

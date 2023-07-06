@@ -7,7 +7,7 @@
 </head>
 <body>
 <h1>${targetYear}년도 ${targetMonth}월 ${targetDay}일 가계부 작성</h1>
-<form action="${pageContext.request.contextPath}/addCashbook" method="post">
+<form action="${pageContext.request.contextPath}/on/addCashbook" method="post">
 	<input type="hidden" name="cashbookDate" value="${targetYear}-${targetMonth}-${targetDay}">
 	<table>
 		<tr>

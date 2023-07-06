@@ -18,16 +18,11 @@ import cash.model.HashtagDao;
 import cash.vo.Cashbook;
 
 
-@WebServlet("/calendar")
+@WebServlet("/on/calendar")
 public class CalendarController extends HttpServlet {
 	@Override
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		//session 인증 검사 코드
-				HttpSession session = request.getSession();
-				if(session.getAttribute("loginMember") == null) {
-					response.sendRedirect(request.getContextPath()+"/login");
-					return;
-				}
+		HttpSession session = request.getSession();
 		String memberId = (String) session.getAttribute("loginMember");
 		
 		// view에 넘겨줄 달력정보(모델값)
@@ -105,6 +100,6 @@ public class CalendarController extends HttpServlet {
 		request.setAttribute("htList", htList);
 		
 		//달력을 출력하는 뷰
-		request.getRequestDispatcher("WEB-INF/view/calendar.jsp").forward(request, response);
+		request.getRequestDispatcher("/WEB-INF/view/calendar.jsp").forward(request, response);
 	}
 }

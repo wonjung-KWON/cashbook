@@ -13,16 +13,11 @@ import javax.servlet.http.HttpSession;
 
 import cash.model.HashtagDao;
 
-@WebServlet("/hashtagList")
+@WebServlet("/on/hashtagList")
 public class HashtagListController extends HttpServlet {
 	@Override
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		//session 인증 검사 코드
 		HttpSession session = request.getSession();
-		if(session.getAttribute("loginMember") == null) {
-			response.sendRedirect(request.getContextPath()+"/login");
-			return;
-		}
 		String memberId = (String) session.getAttribute("loginMember");
 		String word = request.getParameter("word");
 		
@@ -65,7 +60,7 @@ public class HashtagListController extends HttpServlet {
 		request.setAttribute("endPage", endPage);
 		request.setAttribute("list", list);
 		
-		request.getRequestDispatcher("WEB-INF/view/hashtagList.jsp").forward(request, response);
+		request.getRequestDispatcher("/WEB-INF/view/hashtagList.jsp").forward(request, response);
 	}
 
 }

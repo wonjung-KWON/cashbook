@@ -27,13 +27,13 @@ glanlink {color: #000000; text-decoration: none;}
 	
 	<!-- 자바코드(제어문) : JSTL 사용 -->
 	<h1>${targetYear}년 ${targetMonth+1}월</h1>
-	<a href = "${pageContext.request.contextPath}/calendar?targetYear=${targetYear}&targetMonth=${targetMonth-1}">이전달</a>
-	<a href = "${pageContext.request.contextPath}/calendar?targetYear=${targetYear}&targetMonth=${targetMonth+1}">다음달</a>
+	<a href = "${pageContext.request.contextPath}/on/calendar?targetYear=${targetYear}&targetMonth=${targetMonth-1}">이전달</a>
+	<a href = "${pageContext.request.contextPath}/on/calendar?targetYear=${targetYear}&targetMonth=${targetMonth+1}">다음달</a>
 	<div>
 		<h2>이달의 해시태그</h2>
 		<div>
 			<c:forEach var="m" items="${htList}">
-				<a href="${pageContext.request.contextPath}/hashtagList?word=${m.word}" style="color: green; text-decoration: none;">${m.word}(${m.cnt})</a>
+				<a href="${pageContext.request.contextPath}/on/hashtagList?word=${m.word}" style="color: green; text-decoration: none;">${m.word}(${m.cnt})</a>
 			</c:forEach>
 		</div>
 	</div>
@@ -56,7 +56,7 @@ glanlink {color: #000000; text-decoration: none;}
 				<c:if test="${!(d<1 || d > lastDate)}">
 					
 					
-					<td><div><a href="${pageContext.request.contextPath}/CashbookOne?targetYear=${targetYear}&targetMonth=${targetMonth}&targetDay=${d}" style="color: #000000; text-decoration: none;">${d}</a></div>
+					<td><div><a href="${pageContext.request.contextPath}/on/CashbookOne?targetYear=${targetYear}&targetMonth=${targetMonth}&targetDay=${d}" style="color: #000000; text-decoration: none;">${d}</a></div>
 						
 						
 						<c:forEach var="c" items="${list}">

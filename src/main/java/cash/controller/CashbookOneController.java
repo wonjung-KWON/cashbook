@@ -13,16 +13,11 @@ import javax.servlet.http.HttpSession;
 import cash.model.CashbookDao;
 import cash.vo.Cashbook;
 
-@WebServlet("/CashbookOne")
+@WebServlet("/on/CashbookOne")
 public class CashbookOneController extends HttpServlet {
 	@Override
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		//session 인증 검사 코드
 			HttpSession session = request.getSession();
-			if(session.getAttribute("loginMember") == null) {
-				response.sendRedirect(request.getContextPath()+"/login");
-				return;
-			}
 			String memberId = (String) session.getAttribute("loginMember");
 			
 			int targetYear = 0;
@@ -52,10 +47,7 @@ public class CashbookOneController extends HttpServlet {
 			request.setAttribute("targetDay", targetDay);
 			
 			//상세정보 뷰
-			request.getRequestDispatcher("WEB-INF/view/cashbookOne.jsp").forward(request, response);
-	}
-
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+			request.getRequestDispatcher("/WEB-INF/view/cashbookOne.jsp").forward(request, response);
 	}
 
 }

@@ -11,18 +11,12 @@ import javax.servlet.http.HttpSession;
 /**
  * Servlet implementation class CashbookController
  */
-@WebServlet("/cashbook")
+@WebServlet("/on/cashbook")
 public class CashbookController extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		//session 인증 검사 코드
-		HttpSession session = request.getSession();
-		if(session.getAttribute("loginMember") == null) {
-			response.sendRedirect(request.getContextPath()+"/login");
-			return;
-		}
 		
 		//이번달 달력에 가계부목록의 모델값을 셋팅
-		
+		System.out.println("cashbook");
 		request.getRequestDispatcher("/WEB-INF/view/cashbook.jsp").forward(request, response);
 		
 	}

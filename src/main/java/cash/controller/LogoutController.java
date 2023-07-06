@@ -11,7 +11,7 @@ import javax.servlet.http.HttpSession;
 /**
  * Servlet implementation class logoutController
  */
-@WebServlet("/logout")
+@WebServlet("/on/logout")
 public class LogoutController extends HttpServlet {
 
 	
@@ -19,7 +19,7 @@ public class LogoutController extends HttpServlet {
 		HttpSession session =request.getSession();
 		session.invalidate();
 		
-		response.sendRedirect(request.getContextPath()+"/login");
+		response.sendRedirect(request.getContextPath()+"/off/login");
 	}
 
 }

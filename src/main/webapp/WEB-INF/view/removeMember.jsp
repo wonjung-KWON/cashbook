@@ -21,7 +21,7 @@ $(document).ready(function(){
 </head>
 <body>
 	<h1>회원탈퇴</h1>
-	<form action="${pageContext.request.contextPath}/RemoveMemberController" method="post" id="removeForm">
+	<form action="${pageContext.request.contextPath}/on/RemoveMemberController" method="post" id="removeForm">
 		비밀번호 입력 :<input type="password" name="memberPw" id="checkPw" placeholder="비밀번호">
 		<button type="button" id="btn">탈퇴</button>
 	</form>

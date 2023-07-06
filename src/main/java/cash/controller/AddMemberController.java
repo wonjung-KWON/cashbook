@@ -11,17 +11,11 @@ import javax.servlet.http.HttpSession;
 import cash.model.MemberDao;
 import cash.vo.Member;
 
-@WebServlet("/AddMemberController")
+@WebServlet("/off/AddMemberController")
 public class AddMemberController extends HttpServlet {
 	//addMember.jsp 회원 가입폼 이동
 	@Override
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-	// 세션 유효 검사(null일때만)
-		HttpSession session = request.getSession();
-		if(session.getAttribute("loginMember") != null) {
-			response.sendRedirect(request.getContextPath()+"/login");
-			return;
-		}
 		//jsp페이지로 포워드(디스페치)
 		request.getRequestDispatcher("/WEB-INF/view/addMember.jsp").forward(request, response);
 		
@@ -29,12 +23,6 @@ public class AddMemberController extends HttpServlet {
 	//회원가입 액션
 	@Override
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-	// 세션 유효 검사(null일때만)
-		HttpSession session = request.getSession();
-		if(session.getAttribute("loginMember") != null) {
-			response.sendRedirect(request.getContextPath()+"/login");
-			return;
-		}
 		String memberId = request.getParameter("memberId");
 		String memberPw = request.getParameter("memberPw");
 	// request.getParameter()
@@ -46,12 +34,12 @@ public class AddMemberController extends HttpServlet {
 		int row = memberDao.insertMember(member);
 		if(row == 0) {//회원 가입 실패시
 			// addMember.jsp view를 이동하는 controller를 리다이렉트
-			response.sendRedirect(request.getContextPath()+"/AddMemberController");
+			response.sendRedirect(request.getContextPath()+"/off/AddMemberController");
 			System.out.println("회원가입 실패");
 			return;
 		}else if(row == 1) {//회원가입 성공시
 			// login.jsp view를 이동하는 controller를 리다이렉트
-			response.sendRedirect(request.getContextPath()+"/login");
+			response.sendRedirect(request.getContextPath()+"/off/login");
 			System.out.println("회원가입 성공");
 			return;
 			
@@ -59,7 +47,7 @@ public class AddMemberController extends HttpServlet {
 			System.out.println("add member error!");
 		}
 		//login.jsp
-		response.sendRedirect(request.getContextPath()+"/login");
+		response.sendRedirect(request.getContextPath()+"/off/login");
 	}
 
 }
