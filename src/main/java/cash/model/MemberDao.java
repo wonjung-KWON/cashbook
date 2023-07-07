@@ -18,7 +18,6 @@ public class MemberDao {
 		String sql = "SELECT count(*) from member WHERE member_id = ? AND member_pw = password(?)";
 		
 		try {
-			Class.forName("org.mariadb.jdbc.Driver");
 			conn = DriverManager.getConnection("jdbc:mariadb://127.0.0.1:3306/cash","root","java1234");
 			
 			stmt = conn.prepareStatement(sql);
@@ -52,7 +51,6 @@ public class MemberDao {
 		String sql = "update member set member_pw = password(?), updatedate = now() WHERE member_id = ?";
 		
 		try {
-			Class.forName("org.mariadb.jdbc.Driver");
 			conn = DriverManager.getConnection("jdbc:mariadb://127.0.0.1:3306/cash","root","java1234");
 			
 			stmt = conn.prepareStatement(sql);
@@ -83,7 +81,6 @@ public class MemberDao {
 		String sql = "DELETE FROM member WHERE member_id = ? AND member_pw = password(?)";
 		
 		try {
-			Class.forName("org.mariadb.jdbc.Driver");
 			conn = DriverManager.getConnection("jdbc:mariadb://127.0.0.1:3306/cash","root","java1234");
 			
 			stmt = conn.prepareStatement(sql);
@@ -111,7 +108,6 @@ public class MemberDao {
 		ResultSet rs = null;
 		String sql = "SELECT member_id memberId, member_pw memberPw, createdate, updatedate FROM member WHERE member_id = ?";
 		try {
-			Class.forName("org.mariadb.jdbc.Driver");
 			conn = DriverManager.getConnection("jdbc:mariadb://127.0.0.1:3306/cash","root","java1234");
 			stmt = conn.prepareStatement(sql);
 			stmt.setString(1, memberId);
@@ -148,7 +144,6 @@ public class MemberDao {
 		String sql = "INSERT INTO member values(?, PASSWORD(?), now(), now())";
 		
 		try {
-			Class.forName("org.mariadb.jdbc.Driver");
 			conn = DriverManager.getConnection("jdbc:mariadb://127.0.0.1:3306/cash","root","java1234");
 			
 			stmt = conn.prepareStatement(sql);
@@ -181,7 +176,6 @@ public class MemberDao {
 			ResultSet rs = null;
 			String sql = "SELECT member_id memberId FROM member WHERE member_id = ? AND member_pw = PASSWORD(?)";
 			try {
-				Class.forName("org.mariadb.jdbc.Driver");
 				conn = DriverManager.getConnection("jdbc:mariadb://127.0.0.1:3306/cash","root","java1234");
 				
 				stmt = conn.prepareStatement(sql);

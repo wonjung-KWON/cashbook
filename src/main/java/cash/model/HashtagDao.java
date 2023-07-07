@@ -20,7 +20,6 @@ public class HashtagDao {
 		ResultSet rs = null;
 		String sql = "SELECT count(*) FROM hashtag h INNER JOIN cashbook c ON  h.cashbook_no = c.cashbook_no WHERE h.word = ? AND c.member_id = ? ";
 		try {
-			Class.forName("org.mariadb.jdbc.Driver");
 			conn = DriverManager.getConnection("jdbc:mariadb://127.0.0.1:3306/cash","root","java1234");
 			stmt = conn.prepareStatement(sql);
 			stmt.setString(1, word);
@@ -51,7 +50,6 @@ public class HashtagDao {
 		ResultSet rs = null;
 		String sql = "SELECT c.cashbook_no cashbookNo, c.category category, c.cashbook_date cashbookDate, c.price price, c.memo memo, c.createdate createdate, c.updatedate updatedate, h.word word FROM hashtag h INNER JOIN cashbook c ON  h.cashbook_no = c.cashbook_no WHERE h.word = ? AND c.member_id = ? order by c.cashbook_no desc LIMIT ?, ?";
 		try {
-			Class.forName("org.mariadb.jdbc.Driver");
 			conn = DriverManager.getConnection("jdbc:mariadb://127.0.0.1:3306/cash","root","java1234");
 			stmt = conn.prepareStatement(sql);
 			stmt.setString(1, word);
@@ -92,7 +90,6 @@ public class HashtagDao {
 		ResultSet rs = null;
 		String sql = "select word, count(*) cnt FROM hashtag h INNER JOIN cashbook c ON h.cashbook_no = c.cashbook_no WHERE c.member_id = ? AND year(c.cashbook_date) = ? AND MONTH(c.cashbook_date) = ? group by word order by count(*) DESC";
 		try {
-			Class.forName("org.mariadb.jdbc.Driver");
 			conn = DriverManager.getConnection("jdbc:mariadb://127.0.0.1:3306/cash","root","java1234");
 			stmt = conn.prepareStatement(sql);
 			stmt.setString(1, memberId);
@@ -125,7 +122,6 @@ public class HashtagDao {
 		PreparedStatement stmt = null;
 		String sql = "INSERT INTO hashtag(cashbook_no, word, updatedate, createdate) VALUES(?,?,NOW(),NOW())";
 		try {
-			Class.forName("org.mariadb.jdbc.Driver");
 			conn = DriverManager.getConnection("jdbc:mariadb://127.0.0.1:3306/cash","root","java1234");
 			stmt = conn.prepareStatement(sql);
 			stmt.setInt(1, hashtag.getCashbookNo());
