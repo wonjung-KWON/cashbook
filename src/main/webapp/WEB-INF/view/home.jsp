@@ -17,5 +17,6 @@
 	<div>
 		누적 접속자 : ${totalCounter} <!--  request.getAttribute("totalCounter") --> 
 	</div>
+	<a href="${pageContext.request.contextPath}/off/login">로그인</a>
 </body>
 </html>
