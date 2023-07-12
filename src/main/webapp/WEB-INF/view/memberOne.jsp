@@ -11,6 +11,7 @@
 </head>
 <body>
 <h1>회원상세보기</h1>
+<a href="${pageContext.request.contextPath}/on/cashbook">가계부</a>
 <table>
 	<tr>
 		<td>아이디</td>
