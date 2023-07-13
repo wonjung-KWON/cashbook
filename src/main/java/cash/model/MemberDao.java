@@ -141,7 +141,7 @@ public class MemberDao {
 		Connection conn =null;
 		PreparedStatement stmt = null;
 		
-		String sql = "INSERT INTO member values(?, PASSWORD(?), now(), now())";
+		String sql = "INSERT INTO member values(?, PASSWORD(?), ?, ?,now(), now())";
 		
 		try {
 			conn = DriverManager.getConnection("jdbc:mariadb://127.0.0.1:3306/cash","root","java1234");
@@ -149,6 +149,8 @@ public class MemberDao {
 			stmt = conn.prepareStatement(sql);
 			stmt.setString(1, member.getMemberId());
 			stmt.setString(2, member.getMemberPw());
+			stmt.setString(3, member.getMemberName());
+			stmt.setString(4, member.getMemberPhone());
 			row = stmt.executeUpdate();
 		} catch (Exception e) {
 			e.printStackTrace();

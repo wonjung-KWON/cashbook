@@ -25,10 +25,14 @@ public class AddMemberController extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		String memberId = request.getParameter("memberId");
 		String memberPw = request.getParameter("memberPw");
+		String memberName = request.getParameter("memberName");
+		String memberPhone = request.getParameter("memberPhone");
 	// request.getParameter()
 		Member member = new Member();
 		member.setMemberId(memberId);
 		member.setMemberPw(memberPw);
+		member.setMemberName(memberName);
+		member.setMemberPhone(memberPhone);
 		//회원가입 DAO 호출
 		MemberDao memberDao = new MemberDao();
 		int row = memberDao.insertMember(member);
