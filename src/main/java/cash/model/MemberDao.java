@@ -106,7 +106,7 @@ public class MemberDao {
 		Connection conn =null;
 		PreparedStatement stmt = null;
 		ResultSet rs = null;
-		String sql = "SELECT member_id memberId, member_pw memberPw, createdate, updatedate FROM member WHERE member_id = ?";
+		String sql = "SELECT member_id memberId, member_pw memberPw, member_name memberName, member_phone memberPhone, createdate, updatedate FROM member WHERE member_id = ?";
 		try {
 			conn = DriverManager.getConnection("jdbc:mariadb://127.0.0.1:3306/cash","root","java1234");
 			stmt = conn.prepareStatement(sql);
@@ -116,6 +116,8 @@ public class MemberDao {
 				returnMember = new Member();
 				returnMember.setMemberId(rs.getString("memberId"));
 				returnMember.setMemberPw(rs.getString("memberPw"));
+				returnMember.setMemberName(rs.getString("memberName"));
+				returnMember.setMemberPhone(rs.getString("memberPhone"));
 				returnMember.setCreatedate(rs.getString("createdate"));
 				returnMember.setUpdatedate(rs.getString("updatedate"));
 			}
@@ -141,7 +143,7 @@ public class MemberDao {
 		Connection conn =null;
 		PreparedStatement stmt = null;
 		
-		String sql = "INSERT INTO member values(?, PASSWORD(?), ?, ?,now(), now())";
+		String sql = "INSERT INTO member(member_id, member_pw, member_name, member_phone, createdate, updatedate) values(?, PASSWORD(?), ?, ?,now(), now())";
 		
 		try {
 			conn = DriverManager.getConnection("jdbc:mariadb://127.0.0.1:3306/cash","root","java1234");

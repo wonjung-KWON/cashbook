@@ -22,6 +22,14 @@
 		<td>${member.memberPw}</td>
 	</tr>
 	<tr>
+		<td>회원이름</td>
+		<td>${member.memberName}</td>
+	</tr>
+	<tr>
+		<td>전화번호</td>
+		<td>${member.memberPhone}</td>
+	</tr>
+	<tr>
 		<td>생성일</td>
 		<td>${member.createdate}</td>
 	</tr>
