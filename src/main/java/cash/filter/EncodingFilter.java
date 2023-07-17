@@ -12,7 +12,7 @@ import javax.servlet.http.HttpFilter;
 
 @WebFilter("/*")
 public class EncodingFilter extends HttpFilter implements Filter {
-       
+       //utf인코딩 필터
 	public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain) throws IOException, ServletException {
 		System.out.println("전");
 		

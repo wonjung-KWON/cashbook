@@ -56,7 +56,7 @@ glanlink {color: #000000; text-decoration: none;}
 				<c:if test="${!(d<1 || d > lastDate)}">
 					
 					
-					<td><div><a href="${pageContext.request.contextPath}/on/CashbookOne?targetYear=${targetYear}&targetMonth=${targetMonth}&targetDay=${d}" style="color: #000000; text-decoration: none;">${d}</a></div>
+					<td><div><a href="${pageContext.request.contextPath}/on/CashbookOne>?targetYear=${targetYear}&targetMonth=${targetMonth}&targetDay=${d}" style="color: #000000; text-decoration: none;">${d}</a></div>
 						
 						
 						<c:forEach var="c" items="${list}">

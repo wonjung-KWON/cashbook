@@ -82,7 +82,7 @@ public class HashtagDao {
 		}
 		return list;
 	}
-	
+	// word와 카운트 
 	public List<Map<String,Object>> selectWordCountByMonth(int targetYear, int targetMonth, String memberId){
 		List<Map<String,Object>> list = new ArrayList<>();
 		Connection conn = null;
