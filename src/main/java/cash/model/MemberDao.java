@@ -180,7 +180,7 @@ public class MemberDao {
 			ResultSet rs = null;
 			String sql = "SELECT member_id memberId FROM member WHERE member_id = ? AND member_pw = PASSWORD(?)";
 			try {
-				conn = DriverManager.getConnection("jdbc:mariadb://127.0.0.1:3306/cash","root","java1234");
+				conn = DriverManager.getConnection("jdbc:mariadb://43.202.104.49:3306/cash","root","java1234");
 				
 				stmt = conn.prepareStatement(sql);
 				stmt.setString(1, paramMember.getMemberId());

@@ -26,7 +26,7 @@ public class CountListener implements HttpSessionListener {
     		counterService.modifyCounter();
     	}
     }
-
+    
     public void sessionDestroyed(HttpSessionEvent se)  { 
     	System.out.println(se.getSession().getId() + " 세션이 소멸되었습니다.."); 
     	// 현재 접속자 수 -1 -> application.attribute
