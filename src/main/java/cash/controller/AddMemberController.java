@@ -10,6 +10,7 @@ import javax.servlet.http.HttpSession;
 
 import cash.model.MemberDao;
 import cash.vo.Member;
+import service.MemberService;
 
 @WebServlet("/off/AddMemberController")
 public class AddMemberController extends HttpServlet {
@@ -34,8 +35,8 @@ public class AddMemberController extends HttpServlet {
 		member.setMemberName(memberName);
 		member.setMemberPhone(memberPhone);
 		//회원가입 DAO 호출
-		MemberDao memberDao = new MemberDao();
-		int row = memberDao.insertMember(member);
+		MemberService memberService = new MemberService();
+		int row = memberService.insertMember(member);
 		if(row == 0) {//회원 가입 실패시
 			// addMember.jsp view를 이동하는 controller를 리다이렉트
 			response.sendRedirect(request.getContextPath()+"/off/AddMemberController");

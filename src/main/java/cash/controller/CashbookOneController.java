@@ -12,6 +12,7 @@ import javax.servlet.http.HttpSession;
 
 import cash.model.CashbookDao;
 import cash.vo.Cashbook;
+import service.CashbookService;
 
 @WebServlet("/on/CashbookOne")
 public class CashbookOneController extends HttpServlet {
@@ -39,7 +40,7 @@ public class CashbookOneController extends HttpServlet {
 				targetMonth = Integer.parseInt(request.getParameter("targetMonth"));
 				targetDay = Integer.parseInt(request.getParameter("targetDay"));
 			}
-			List<Cashbook> list = new CashbookDao().selectCashbookOne(memberId, targetYear, targetMonth+1, targetDay);
+			List<Cashbook> list = new CashbookService().selectCashbookOne(memberId, targetYear, targetMonth, targetDay);
 			request.setAttribute("list", list);
 			
 			request.setAttribute("targetYear", targetYear);

@@ -15,6 +15,8 @@ import cash.model.CashbookDao;
 import cash.model.HashtagDao;
 import cash.vo.Cashbook;
 import cash.vo.Hashtag;
+import service.CashbookService;
+import service.HashtagService;
 
 @WebServlet("/on/addCashbook")
 public class AddCashbookController extends HttpServlet {
@@ -24,6 +26,7 @@ public class AddCashbookController extends HttpServlet {
 		int targetYear = Integer.parseInt(request.getParameter("targetYear"));
 		int targetMonth = Integer.parseInt(request.getParameter("targetMonth"));
 		int targetDay = Integer.parseInt(request.getParameter("targetDay"));
+		System.out.println(targetMonth+"addcashbookController");
 		
 		request.setAttribute("targetYear", targetYear);
 		request.setAttribute("targetMonth", targetMonth);
@@ -62,8 +65,8 @@ public class AddCashbookController extends HttpServlet {
 		cashbook.setMemo(memo);
 		
 		//입력 DAO실행
-		CashbookDao cashbookDao = new CashbookDao();
-		int cashbookNo = cashbookDao.insertCashbook(cashbook); //키값반환
+		CashbookService c = new CashbookService();
+		int cashbookNo = c.addCashbook(cashbook); //키값반환
 		//입력실패
 		if(cashbookNo  == 0) {
 			System.out.println("입력실패");
@@ -73,7 +76,7 @@ public class AddCashbookController extends HttpServlet {
 		//입력성공 -> 해시태그가 있다면 - > 해시태그를 추출 -> 해시태그를 입력(반복문활용)
 		//해시태그 추출 알고리즘
 		// # #구디 #구디 #자바
-		HashtagDao hashtagDao = new HashtagDao();
+		HashtagService hashtagService = new HashtagService();
 		String memo2 = cashbook.getMemo();
 		String memo3 = memo2.replace("#", " #"); // "#구디#아카데미" -> " #구디 #아카데미"
 		
@@ -92,7 +95,7 @@ public class AddCashbookController extends HttpServlet {
 				Hashtag hashtag = new Hashtag();
 				hashtag.setCashbookNo(cashbookNo);
 				hashtag.setWord(s);
-				hashtagDao.insertHashtag(hashtag);
+				hashtagService.insertHashtag(hashtag);
 			}
 		response.sendRedirect(request.getContextPath()+"/on/calendar");
 	}

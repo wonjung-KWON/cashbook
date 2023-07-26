@@ -16,6 +16,8 @@ import javax.websocket.Session;
 import cash.model.CashbookDao;
 import cash.model.HashtagDao;
 import cash.vo.Cashbook;
+import service.CashbookService;
+import service.HashtagService;
 
 
 @WebServlet("/on/calendar")
@@ -54,6 +56,8 @@ public class CalendarController extends HttpServlet {
 			targetMonth = firstDay.get(Calendar.MONTH);
 			
 		}
+		System.out.println(targetYear+"<-- targetYear 2");
+		System.out.println(targetMonth+"<-- targetMonth 2");
 		// 달력출력시 첫번째 1일이 무슨요일인지 알기 위한 알고리즘
 		// 1일날짜의 요일(일1, 월2, ... 토6)-1
 		int beginBlank = firstDay.get(Calendar.DAY_OF_WEEK)-1;
@@ -81,9 +85,9 @@ public class CalendarController extends HttpServlet {
 		System.out.println(preLastDate+"<-- 전달마지막날짜");
 		
 		// 모델을 호출(DAO 타켓 월의 수입/지출데이터
-		List<Cashbook> list = new CashbookDao().selectCashbookListByMonth(memberId, targetYear, targetMonth+1);
+		List<Cashbook> list = new CashbookService().selectCashbookListByMonth(memberId, targetYear, targetMonth+1);
 		
-		List<Map<String,Object>> htList = new HashtagDao().selectWordCountByMonth(targetYear, targetMonth+1, memberId);
+		List<Map<String,Object>> htList = new HashtagService().selectWordCountByMonth(targetYear, targetMonth+1, memberId);
 		
 		// 뷰에 값넘기기 위해 request속성에 값 넘기기
 		request.setAttribute("targetYear", targetYear);

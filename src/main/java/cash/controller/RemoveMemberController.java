@@ -10,6 +10,7 @@ import javax.servlet.http.HttpSession;
 
 import cash.model.MemberDao;
 import cash.vo.Member;
+import service.MemberService;
 
 @WebServlet("/on/RemoveMemberController")
 public class RemoveMemberController extends HttpServlet {
@@ -33,8 +34,8 @@ public class RemoveMemberController extends HttpServlet {
 		member.setMemberId(memberId);
 		member.setMemberPw(memberPw);
 		
-		MemberDao memberDao = new MemberDao();
-		int row = memberDao.removeMember(member);
+		MemberService memberService = new MemberService();
+		int row = memberService.removeMember(member);
 		if(row == 1) {
 		//탈퇴성공
 		session.invalidate();

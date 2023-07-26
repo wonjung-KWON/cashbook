@@ -11,6 +11,7 @@ import javax.servlet.http.HttpSession;
 
 import cash.model.MemberDao;
 import cash.vo.Member;
+import service.MemberService;
 
 @WebServlet("/off/login")
 public class LoginController extends HttpServlet {
@@ -24,9 +25,10 @@ public class LoginController extends HttpServlet {
 		String memberPw = request.getParameter("memberPw");
 		
 		Member member = new Member(memberId, memberPw, null, null, null, null);
+		System.out.println(member+"loginController");
 		
-		MemberDao memberDao = new MemberDao();
-		Member loginMember = memberDao.selectMemberById(member);
+		MemberService memberService = new MemberService();
+		Member loginMember = memberService.selectMemberById(member);
 			
 		if(loginMember == null) { // null 로그인실패
 		    System.out.println("로그인 실패");

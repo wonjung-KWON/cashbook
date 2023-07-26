@@ -12,6 +12,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import cash.model.HashtagDao;
+import service.HashtagService;
 
 @WebServlet("/on/hashtagList")
 public class HashtagListController extends HttpServlet {
@@ -32,9 +33,9 @@ public class HashtagListController extends HttpServlet {
 		int beginRow = (currentPage - 1) * rowPerPage;
 		
 		System.out.println(word+"<-- hashtagList word");
-		List<Map<String,Object>> list = new HashtagDao().AllHashtagList(word, memberId, beginRow, rowPerPage);
+		List<Map<String,Object>> list = new HashtagService().AllHashtagList(word, memberId, beginRow, rowPerPage);
 		
-		int totalRow = new HashtagDao().CountHashtagList(word, memberId);
+		int totalRow = new HashtagService().CountHashtagList(word, memberId);
 		System.out.println(totalRow + "<-- totalRow");
 		int lastPage = totalRow / rowPerPage;
 		if(totalRow % rowPerPage != 0) {

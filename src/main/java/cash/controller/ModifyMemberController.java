@@ -10,6 +10,7 @@ import javax.servlet.http.HttpSession;
 
 import cash.model.MemberDao;
 import cash.vo.Member;
+import service.MemberService;
 
 @WebServlet("/on/modifyMember")
 public class ModifyMemberController extends HttpServlet {
@@ -35,14 +36,14 @@ public class ModifyMemberController extends HttpServlet {
 		member.setMemberId(memberId);
 		member.setMemberPw(checkPw);
 		
-		MemberDao memberDao = new MemberDao();
-		int row = memberDao.checkPw(member);
+		MemberService memberService = new MemberService();
+		int row = memberService.checkPw(member);
 		if(row == 0) {
 			System.out.println("비밀번호 틀림");
 			response.sendRedirect(request.getContextPath()+"/on/modifyMember");
 			return;
 		} else if(row == 1) {
-			int row2 = memberDao.modifyMember(memberId, memberPw);
+			int row2 = memberService.modifyMember(memberId, memberPw);
 			if(row2 == 0) {
 				System.out.println("회원변경실패");
 				response.sendRedirect(request.getContextPath()+"/on/modifyMember");
