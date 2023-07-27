@@ -39,6 +39,15 @@ glanlink {color: #000000; text-decoration: none;}
 	</div>
 	<table class="table">
 		<tr>
+			<td style="color: red;">일</td>
+			<td style="color: blue;">월</td>
+			<td style="color: blue;">화</td>
+			<td style="color: blue;">수</td>
+			<td style="color: blue;">목</td>
+			<td style="color: blue;">금</td>
+			<td style="color: blue;">토</td>
+		</tr>
+		<tr>
 			<c:forEach var="i" begin="0" end="${totalCell-1}" step="1">
 				<c:set var="d" value="${i-beginBlank+1}"/>
 			
@@ -74,23 +83,9 @@ glanlink {color: #000000; text-decoration: none;}
 					</td>
 				
 				</c:if>
-				<!-- 
-				<c:if test="${(!(d<1 || (i-beginBlank+1) > lastDate)) && todayMonth == targetMonth
-								&& today == num 
-								&& todayYear == targetYear}">
-					<td style="background-color:gray;"><a href="" >${d}</a></td>
-				</c:if>
-				<c:if test="${(!(d<1 || (i-beginBlank+1) > lastDate)) && i % 7 == 6}">
-					<td><a href="" style="color:blue; text-decoration: none;">${d}</a></td>	
-				</c:if>
-				<c:if test="${(!(d<1 || (i-beginBlank+1) > lastDate)) && i % 7 == 0}">
-					<td><a href="" style="color:red; text-decoration: none;">${d}</a></td>	
-				</c:if>
-				 -->
 			</c:forEach>
 		</tr>
 	</table>
-<!--  -->
 
 </body>
 </html>

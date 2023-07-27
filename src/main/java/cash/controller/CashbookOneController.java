@@ -25,14 +25,13 @@ public class CashbookOneController extends HttpServlet {
 			int targetMonth = 0;
 			int targetDay = 0;
 			String cashbookDate = null;
-			if(request.getParameter("cashbookDate") != null) {
+			if(request.getParameter("targetYear") != null && request.getParameter("targetMonth") != null && request.getParameter("targetDay") != null) {
 				cashbookDate = request.getParameter("cashbookDate");
-				targetYear = Integer.parseInt(cashbookDate.substring(0, 4));
-				targetMonth = Integer.parseInt(cashbookDate.substring(5, 7));
-				targetDay = Integer.parseInt(cashbookDate.substring(8, 10));
+				targetYear = Integer.parseInt(request.getParameter("targetYear"));
+				targetMonth = Integer.parseInt(request.getParameter("targetMonth"));
+				targetMonth = targetMonth;
+				targetDay = Integer.parseInt(request.getParameter("targetDay"));
 				System.out.println(targetYear);
-				System.out.println(targetMonth);
-				targetMonth = targetMonth-1;
 				System.out.println(targetMonth);
 				System.out.println(targetDay);
 			}else {
@@ -40,7 +39,7 @@ public class CashbookOneController extends HttpServlet {
 				targetMonth = Integer.parseInt(request.getParameter("targetMonth"));
 				targetDay = Integer.parseInt(request.getParameter("targetDay"));
 			}
-			List<Cashbook> list = new CashbookService().selectCashbookOne(memberId, targetYear, targetMonth, targetDay);
+			List<Cashbook> list = new CashbookService().selectCashbookOne(memberId, targetYear, targetMonth+1, targetDay);
 			request.setAttribute("list", list);
 			
 			request.setAttribute("targetYear", targetYear);

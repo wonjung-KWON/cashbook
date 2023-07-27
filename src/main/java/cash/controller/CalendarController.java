@@ -88,7 +88,7 @@ public class CalendarController extends HttpServlet {
 		List<Cashbook> list = new CashbookService().selectCashbookListByMonth(memberId, targetYear, targetMonth+1);
 		
 		List<Map<String,Object>> htList = new HashtagService().selectWordCountByMonth(targetYear, targetMonth+1, memberId);
-		
+		System.out.println(htList+"CalendarController htList");
 		// 뷰에 값넘기기 위해 request속성에 값 넘기기
 		request.setAttribute("targetYear", targetYear);
 		request.setAttribute("targetMonth", targetMonth);

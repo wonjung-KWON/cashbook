@@ -11,6 +11,27 @@ import cash.vo.Cashbook;
 
 public class CashbookService {
 	private CashbookDao cashbookDao;
+	public List<Cashbook> todayCashbook(String memberId, int targetYear, int targetMonth) {
+		this.cashbookDao = new CashbookDao();
+		List<Cashbook> list = new ArrayList<Cashbook>();
+		Connection conn = null;
+		try {
+			// conn.setAutoCommit(false);
+			conn = DriverManager.getConnection("jdbc:mariadb://43.202.104.49:3306/cash","root","java1234");
+			list = cashbookDao.todayCashbook(conn, memberId, targetYear, targetMonth);
+			System.out.println(list + "CashbookService todayCashbook");
+		}catch (Exception e) {
+			// conn.rollback();
+			e.printStackTrace();
+		}finally {
+			try {
+				conn.close();
+			}catch (Exception e2) {
+				e2.printStackTrace();
+			}
+		}
+		return list;
+	}
 	//현재달 최고 수입
 	public int selectMaxMoney(String memberId, int targetYear, int targetMonth) {
 		this.cashbookDao = new CashbookDao();
@@ -58,9 +79,9 @@ public class CashbookService {
 		return row;
 	}
 	//이번달 마지막 지출
-	public List<Cashbook> selectLastMoney(String memberId, int targetYear, int targetMonth) {
+	public Cashbook selectLastMoney(String memberId, int targetYear, int targetMonth) {
 		this.cashbookDao = new CashbookDao();
-		List<Cashbook> list = new ArrayList<Cashbook>();
+		Cashbook list = new Cashbook();
 		Connection conn = null;
 		try {
 			// conn.setAutoCommit(false);

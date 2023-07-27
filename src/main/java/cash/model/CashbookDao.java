@@ -12,12 +12,45 @@ import cash.vo.Cashbook;
 import cash.vo.Member;
 
 public class CashbookDao {
-	// 이번달 마지막 지출
-		public List<Cashbook> selectLastMoney(Connection conn, String memberId, int targetYear, int targetMonth) {
+	// 최근 기록 7개
+			public List<Cashbook> todayCashbook(Connection conn, String memberId, int targetYear, int targetMonth) {
 				List<Cashbook> list = new ArrayList<Cashbook>();
+					PreparedStatement stmt = null;
+					ResultSet rs = null;
+					String sql = "select category ,price, cashbook_date cashbookDate FROM cashbook WHERE member_id = ? AND YEAR(cashbook_date) = ? AND MONTH(cashbook_date) = ? order by updatedate desc limit 0,7";
+					try {
+						stmt = conn.prepareStatement(sql);
+						stmt.setString(1, memberId);
+						stmt.setInt(2, targetYear);
+						stmt.setInt(3, targetMonth);
+						System.out.println(stmt +"<--stmt");
+						rs = stmt.executeQuery();
+						
+						while(rs.next()) {
+							Cashbook c = new Cashbook();
+							c.setCategory(rs.getString("category"));
+							c.setPrice(rs.getInt("price"));
+							c.setCashbookDate(rs.getString("cashbookDate"));
+							list.add(c);
+						}
+					} catch (Exception e) {
+						e.printStackTrace();
+					} finally {
+						try {
+							rs.close();
+							stmt.close();
+						}catch (Exception e2) {
+							e2.printStackTrace();
+						}
+					}
+					return list;
+				}
+	// 이번달 마지막 지출
+		public Cashbook selectLastMoney(Connection conn, String memberId, int targetYear, int targetMonth) {
+				Cashbook list = new Cashbook();
 				PreparedStatement stmt = null;
 				ResultSet rs = null;
-				String sql = "select price, cashbook_date cashbookDate FROM cashbook WHERE member_id = ? AND YEAR(cashbook_date) = ? AND MONTH(cashbook_date) = ? AND category = '수입' order by updatedate desc limit 0,1";
+				String sql = "select price, updatedate FROM cashbook WHERE member_id = ? AND YEAR(cashbook_date) = ? AND MONTH(cashbook_date) = ? AND category = '수입' order by updatedate desc limit 0,1";
 				try {
 					stmt = conn.prepareStatement(sql);
 					stmt.setString(1, memberId);
@@ -27,10 +60,8 @@ public class CashbookDao {
 					rs = stmt.executeQuery();
 					
 					while(rs.next()) {
-						Cashbook c = new Cashbook();
-						c.setPrice(rs.getInt("price"));
-						c.setCashbookDate(rs.getString("cashbookDate"));
-						list.add(c);
+						list.setPrice(rs.getInt("price"));
+						list.setUpdatedate(rs.getString("updatedate"));
 					}
 				} catch (Exception e) {
 					e.printStackTrace();

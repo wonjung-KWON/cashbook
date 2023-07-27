@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn"%>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -45,7 +46,7 @@
 
             <!-- Nav Item - Dashboard -->
             <li class="nav-item active">
-                <a class="nav-link" href="index.html">
+                <a class="nav-link" href="${pageContext.request.contextPath}/on/calendar">
                     <i class="fas fa-fw fa-tachometer-alt"></i>
                     <span>달력보기</span></a>
             </li>
@@ -60,43 +61,45 @@
 
             <!-- Nav Item - Pages Collapse Menu -->
             <li class="nav-item">
-                    <span>수입 지출</span>
-                    <div class="bg-white py-2 collapse-inner rounded">
-                        <h6 class="collapse-header">현재달</h6>
-                        <span>수입</span>
-                        <span>지출</span>
-                        <table>
-                        	<tr>
-                        		<td>수입</td>
-                        		<td>
-                        		<c:set var="totalSum" value="0" /> <!-- 총 합을 저장할 변수를 초기화합니다 -->
+                    <div style="text-align: center;  padding: 5px;">
+					    <span style="color: white;">수입 지출</span>
+					</div>
 
-								<c:forEach var="c" items="${list}">
-								    <c:if test="${c.category == '수입'}">
-								        <c:set var="totalSum" value="${totalSum + c.price}" /> <!-- 합을 누적합니다 -->
-								    </c:if>
-								</c:forEach>
-								
-								<span style="color:blue;">총 합: ${totalSum}</span> <!-- 총 합을 표시합니다 -->
+                    
+                    <div class="bg-white py-2 px-4 collapse-inner rounded">
+					    <h6 class="collapse-header">현재달</h6>
+					    <table>
+					        <tr>
+					            <td>수입</td>
+					            <td>
+					                <c:set var="totalSumIncome" value="0" /> <!-- 수입 총 합을 저장할 변수를 초기화합니다 -->
+					
+					                <c:forEach var="c" items="${list}">
+					                    <c:if test="${c.category == '수입'}">
+					                        <c:set var="totalSumIncome" value="${totalSumIncome + c.price}" /> <!-- 합을 누적합니다 -->
+					                    </c:if>
+					                </c:forEach>
+					
+					                <span style="color: blue;">총 합: ${totalSumIncome}</span> <!-- 총 합을 표시합니다 -->
+					            </td>
+					        </tr>
+					        <tr>
+					            <td>지출</td>
+					            <td>
+					                <c:set var="totalSumExpense" value="0" /> <!-- 지출 총 합을 저장할 변수를 초기화합니다 -->
+					
+					                <c:forEach var="c" items="${list}">
+					                    <c:if test="${c.category == '지출'}">
+					                        <c:set var="totalSumExpense" value="${totalSumExpense + c.price}" /> <!-- 합을 누적합니다 -->
+					                    </c:if>
+					                </c:forEach>
+					
+					                <span style="color: red;">총 합: ${totalSumExpense}</span> <!-- 총 합을 표시합니다 -->
+					            </td>
+					        </tr>
+					    </table>
+					</div>
 
-                        		</td>
-                        	</tr>
-                        	<tr>
-                        		<td>지출</td>
-                        		<td>
-                        		<c:set var="totalSum2" value="0" /> <!-- 총 합을 저장할 변수를 초기화합니다 -->
-
-								<c:forEach var="c" items="${list}">
-								    <c:if test="${c.category == '수입'}">
-								        <c:set var="totalSum" value="${totalSum2 + c.price}" /> <!-- 합을 누적합니다 -->
-								    </c:if>
-								</c:forEach>
-								
-								<span style="color:red;">총 합: ${totalSum2}</span> <!-- 총 합을 표시합니다 -->
-                        		</td>
-                        	</tr>
-                        </table>
-                    </div>
             </li>
 
 
@@ -118,9 +121,9 @@
                 <div id="collapsePages" class="collapse" aria-labelledby="headingPages" data-parent="#accordionSidebar">
                     <div class="bg-white py-2 collapse-inner rounded">
                         <h6 class="collapse-header">로그인 관련</h6>
-                        <a class="collapse-item" href="login.html">로그인</a>
-                        <a class="collapse-item" href="register.html">회원가입</a>
-                        <a class="collapse-item" href="forgot-password.html">회원정보수정</a>
+                        <a class="collapse-item" href="${pageContext.request.contextPath}/off/login">로그인</a>
+                        <a class="collapse-item" href="${pageContext.request.contextPath}/off/AddMemberController">회원가입</a>
+                        <a class="collapse-item" href="${pageContext.request.contextPath}/on/modifyMember">회원정보수정</a>
                     </div>
                 </div>
             </li>
@@ -152,48 +155,9 @@
                         <i class="fa fa-bars"></i>
                     </button>
 
-                    <!-- Topbar Search -->
-                    <form
-                        class="d-none d-sm-inline-block form-inline mr-auto ml-md-3 my-2 my-md-0 mw-100 navbar-search">
-                        <div class="input-group">
-                            <input type="text" class="form-control bg-light border-0 small" placeholder="Search for..."
-                                aria-label="Search" aria-describedby="basic-addon2">
-                            <div class="input-group-append">
-                                <button class="btn btn-primary" type="button">
-                                    <i class="fas fa-search fa-sm"></i>
-                                </button>
-                            </div>
-                        </div>
-                    </form>
 
                     <!-- Topbar Navbar -->
                     <ul class="navbar-nav ml-auto">
-
-                        <!-- Nav Item - Search Dropdown (Visible Only XS) -->
-                        <li class="nav-item dropdown no-arrow d-sm-none">
-                            <a class="nav-link dropdown-toggle" href="#" id="searchDropdown" role="button"
-                                data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                <i class="fas fa-search fa-fw"></i>
-                            </a>
-                            <!-- Dropdown - Messages -->
-                            <div class="dropdown-menu dropdown-menu-right p-3 shadow animated--grow-in"
-                                aria-labelledby="searchDropdown">
-                                <form class="form-inline mr-auto w-100 navbar-search">
-                                    <div class="input-group">
-                                        <input type="text" class="form-control bg-light border-0 small"
-                                            placeholder="Search for..." aria-label="Search"
-                                            aria-describedby="basic-addon2">
-                                        <div class="input-group-append">
-                                            <button class="btn btn-primary" type="button">
-                                                <i class="fas fa-search fa-sm"></i>
-                                            </button>
-                                        </div>
-                                    </div>
-                                </form>
-                            </div>
-                        </li>
-
-
 
                         <div class="topbar-divider d-none d-sm-block"></div>
 
@@ -203,24 +167,27 @@
                                 data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                 <span class="mr-2 d-none d-lg-inline text-gray-600 small">${loginMember}</span>
                                 <img class="img-profile rounded-circle"
-                                    src="img/undraw_profile.svg">
+                                    src="${pageContext.request.contextPath}/temp/img/undraw_profile.svg">
                             </a>
                             <!-- Dropdown - User Information -->
                             <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in"
                                 aria-labelledby="userDropdown">
-                                <a class="dropdown-item" href="#">
+                                <a class="dropdown-item" href="${pageContext.request.contextPath}/on/memberOne">
                                     <i class="fas fa-user fa-sm fa-fw mr-2 text-gray-400"></i>
                                     프로필 정보
                                 </a>
-                                <a class="dropdown-item" href="#">
+                                <a class="dropdown-item" href="${pageContext.request.contextPath}/on/modifyMember">
                                     <i class="fas fa-cogs fa-sm fa-fw mr-2 text-gray-400"></i>
                                     회원 설정
                                 </a>
                                 <div class="dropdown-divider"></div>
-                                <a class="dropdown-item" href="#" data-toggle="modal" data-target="#logoutModal">
-                                    <i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i>
-                                    Logout
-                                </a>
+                                <c:if test="${memberId != null || memberId != ''}">
+	                                <a class="dropdown-item" href="${pageContext.request.contextPath}/on/logout" data-toggle="modal" data-target="#logoutModal">
+	                                    <i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i>
+	                                    Logout
+	                                </a>
+                                </c:if>
+                                
                             </div>
                         </li>
 
@@ -289,13 +256,10 @@
                                                 <div class="col-auto">
                                                     <div class="h5 mb-0 mr-3 font-weight-bold text-gray-800">${totalM}원</div>
                                                 </div>
-                                                <div class="col-auto">
-		                                            <i class="fas fa-dollar-sign fa-2x text-gray-300"></i>
-		                                        </div>
                                             </div>
                                         </div>
                                         <div class="col-auto">
-                                            <i class="fas fa-clipboard-list fa-2x text-gray-300"></i>
+                                            <i class="fas fa-dollar-sign fa-2x text-gray-300"></i>
                                         </div>
                                     </div>
                                 </div>
@@ -311,10 +275,9 @@
                                             <div class="text-xs font-weight-bold text-warning text-uppercase mb-1">
                                                 마지막 수입</div>
                                             <div class="h5 mb-0 font-weight-bold text-gray-800">
-                                            <c:forEach var="c" items="${list}">
-                                            	<span>${c.price}</span>
-                                            	<span>${c.cashbookDate}</span>
-                                            </c:forEach>
+
+                                            	<h6>${lastPrice} : ${lastDay}</h6>
+
                                             </div>
                                         </div>
                                        <div class="col-auto">
@@ -336,12 +299,11 @@
                                 <!-- Card Header - Dropdown -->
                                 <div
                                     class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
-                                    <h6 class="m-0 font-weight-bold text-primary">이번달의 해쉬 태그 키워드</h6>
-									<table>
-										<tr>
-											<td></td>
-										</tr>
-									</table>
+                                    <h6 class="m-0 font-weight-bold text-primary">이번달의 해쉬 태그 키워드 : 
+	                                    <c:forEach var="m" items="${htList}">
+											<a href="${pageContext.request.contextPath}/on/hashtagList?word=${m.word}" style="color: green; text-decoration: none;">${m.word}(${m.cnt})</a>
+										</c:forEach>
+									</h6>
                                 </div>
                             </div>
                         </div>
@@ -365,6 +327,66 @@
                                 </div>
                             </div>
                         </div>
+                         <!-- Area Chart -->
+                        <div class="col-xl-8 col-lg-7">
+                            <div class="card shadow mb-4">
+                                <!-- Card Header - Dropdown -->
+                                <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
+                                	<table class="table">
+	                                	<tr>
+											<td style="color: red;">일</td>
+											<td style="color: black;">월</td>
+											<td style="color: black;">화</td>
+											<td style="color: black;">수</td>
+											<td style="color: black;">목</td>
+											<td style="color: black;">금</td>
+											<td style="color: blue;">토</td>
+										</tr>
+										<tr>
+											<c:forEach var="i" begin="0" end="${totalCell-1}" step="1">
+												<c:set var="d" value="${i-beginBlank+1}"/>
+											
+												<c:if test="${i != 0 && i%7 == 0}">
+													</tr><tr>
+												</c:if>
+												
+												<c:if test="${d<1}">
+													<td>${preLastDate - beginBlank + i + 1}</td>
+												</c:if>
+												<c:if test="${d > lastDate}">
+													<td>${i - lastDate - beginBlank + 1}</td>
+												</c:if>
+												
+												<c:if test="${!(d<1 || d > lastDate)}">
+													<td>
+														<div>
+															<a href="${pageContext.request.contextPath}/on/CashbookOne?targetYear=${todayYear}&targetMonth=${todayMonth}&targetDay=${d}" style="color: #000000; text-decoration: none;">${d}</a>
+														</div>
+													</td>
+												</c:if>
+											</c:forEach>
+										</tr>
+										<tr>
+										<td></td>
+										</tr>
+									</table>
+                                </div>
+                            </div>
+                        </div>
+                         <!-- Pie Chart -->
+                        <div class="col-xl-4 col-lg-5">
+                            <div class="card shadow mb-4">
+                                <!-- Card Header - Dropdown -->
+                                <div
+                                    class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
+                                    <h6 class="m-0 font-weight-bold text-primary">최근 거래 기록</h6><br>
+                                </div>
+                                <br>
+                                    <c:forEach var="n" items="${cList}">
+                                    	<span style="text-align: center;">거래내역 : ${n.category} : ${n.price}원 ${fn:substring(n.cashbookDate, 5, 10)}</span><br>
+                                    </c:forEach>
+                            </div>
+                        </div>
                     </div>
                 </div>
                 <!-- /.container-fluid -->
@@ -386,12 +408,6 @@
         <!-- End of Content Wrapper -->
 
     </div>
-    <!-- End of Page Wrapper -->
-
-    <!-- Scroll to Top Button-->
-    <a class="scroll-to-top rounded" href="#page-top">
-        <i class="fas fa-angle-up"></i>
-    </a>
 
     <!-- Logout Modal-->
     <div class="modal fade" id="logoutModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
@@ -407,7 +423,7 @@
                 <div class="modal-body">로그아웃 하시겠습니까?</div>
                 <div class="modal-footer">
                     <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
-                    <a class="btn btn-primary" href="login.html">Logout</a>
+                    <a class="btn btn-primary" href="${pageContext.request.contextPath}/on/logout">Logout</a>
                 </div>
             </div>
         </div>
