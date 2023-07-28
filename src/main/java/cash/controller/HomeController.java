@@ -75,15 +75,24 @@ public class HomeController extends HttpServlet {
 		List<Cashbook> list = c.selectCashbookListByMonth(memberId, todayYear, todayMonth+1);
 		// 서비스 호출을 통해 현재달의 카테고리 데이터 출력
 		List<Map<String,Object>> htList = new HashtagService().selectWordCountByMonth(todayYear, todayMonth+1, memberId);
-		
+		// 현재 년월을 값을 보내 가장 수익이많았던 값 cashbookService 호출에서 가져오기
 		int maxMoney = c.selectMaxMoney(memberId, todayYear, todayMonth+1);
+		// 현재 년월을 값을 보내 가장 지출이많았던 값 cashbookService 호출에서 가져오기
 		int maxUnMoney = c.selectMaxUnMoney(memberId, todayYear, todayMonth+1);
+		// Cashbook 클래스에 수입 마지막 날의 가계부 작성한 데이터 cashbookService 호출에서 값받아서 넣기 
 		Cashbook lastMoney = c.selectLastMoney(memberId, todayYear, todayMonth+1);
+		// 변수안에 lastMoney 클래스에서 price 값 가져와서 초기값 설정
 		int lastPrice = lastMoney.getPrice();
+		// 마지막날 변수에 lastMoney 클래스에서 값 가져와서 초기값 설정
 		String lastDay = lastMoney.getUpdatedate();
 		System.out.println(lastPrice + "homeController lastPrice");
+		// 총 수익 cashbookService 호출에서 값 받아오기
+		int totalMoney = c.totalMoney(memberId);
+		// 총 지출 cashbookService 호출에서 값 받아오기
+		int totalUnMoney = c.totalUnMoney(memberId);
+		// 총 수익과 총 지출을 연산하여 남은 자산 출력
+		int totalM = totalMoney - totalUnMoney;
 		
-		int totalM = maxMoney - maxUnMoney;
 		System.out.println(maxMoney+"home maxMoney");
 		System.out.println(maxUnMoney+"home maxUnMoney");
 		System.out.println(lastMoney+"home lastMoney");

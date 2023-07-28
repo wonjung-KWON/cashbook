@@ -83,9 +83,26 @@ public class CalendarController extends HttpServlet {
 		preMonth.set(Calendar.MONTH, targetMonth -1);
 		int preLastDate = preMonth.getActualMaximum(Calendar.DATE);
 		System.out.println(preLastDate+"<-- 전달마지막날짜");
-		
+		//서비스 호출 변수 선언
+		CashbookService n = new CashbookService();
+		// 현재 년월을 값을 보내 가장 수익이많았던 값 cashbookService 호출에서 가져오기
+		int maxMoney = n.selectMaxMoney(memberId, targetYear, targetMonth+1);
+		// 현재 년월을 값을 보내 가장 지출이많았던 값 cashbookService 호출에서 가져오기
+		int maxUnMoney = n.selectMaxUnMoney(memberId, targetYear, targetMonth+1);
+		// Cashbook 클래스에 수입 마지막 날의 가계부 작성한 데이터 cashbookService 호출에서 값받아서 넣기 
+		Cashbook lastMoney = n.selectLastMoney(memberId, targetYear, targetMonth+1);
+		// 변수안에 lastMoney 클래스에서 price 값 가져와서 초기값 설정
+		int lastPrice = lastMoney.getPrice();
+		// 마지막날 변수에 lastMoney 클래스에서 값 가져와서 초기값 설정
+		String lastDay = lastMoney.getUpdatedate();
+		// 총 수익 cashbookService 호출에서 값 받아오기
+		int totalMoney = n.totalMoney(memberId);
+		// 총 지출 cashbookService 호출에서 값 받아오기
+		int totalUnMoney = n.totalUnMoney(memberId);
+		// 총 수익과 총 지출을 연산하여 남은 자산 출력
+		int totalM = totalMoney - totalUnMoney;
 		// 모델을 호출(DAO 타켓 월의 수입/지출데이터
-		List<Cashbook> list = new CashbookService().selectCashbookListByMonth(memberId, targetYear, targetMonth+1);
+		List<Cashbook> list = n.selectCashbookListByMonth(memberId, targetYear, targetMonth+1);
 		
 		List<Map<String,Object>> htList = new HashtagService().selectWordCountByMonth(targetYear, targetMonth+1, memberId);
 		System.out.println(htList+"CalendarController htList");
@@ -102,6 +119,11 @@ public class CalendarController extends HttpServlet {
 		request.setAttribute("preLastDate", preLastDate);
 		request.setAttribute("list", list);
 		request.setAttribute("htList", htList);
+		request.setAttribute("maxMoney", maxMoney);
+		request.setAttribute("maxUnMoney", maxUnMoney);
+		request.setAttribute("lastPrice", lastPrice);
+		request.setAttribute("lastDay", lastDay);
+		request.setAttribute("totalM", totalM);
 		
 		//달력을 출력하는 뷰
 		request.getRequestDispatcher("/WEB-INF/view/calendar.jsp").forward(request, response);

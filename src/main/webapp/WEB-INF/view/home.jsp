@@ -34,7 +34,7 @@
         <ul class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion" id="accordionSidebar">
 
             <!-- Sidebar - Brand -->
-            <a class="sidebar-brand d-flex align-items-center justify-content-center" href="index.html">
+            <a class="sidebar-brand d-flex align-items-center justify-content-center" href="${pageContext.request.contextPath}/on/home">
                 <div class="sidebar-brand-icon rotate-n-15">
                     <i class="fas fa-laugh-wink"></i>
                 </div>
@@ -360,7 +360,12 @@
 												<c:if test="${!(d<1 || d > lastDate)}">
 													<td>
 														<div>
+														<c:if test="${today == d}">
+															<a href="${pageContext.request.contextPath}/on/CashbookOne?targetYear=${todayYear}&targetMonth=${todayMonth}&targetDay=${d}" style=" color: #FFB2D9; text-decoration: none;">${d}</a>
+														</c:if>
+														<c:if test="${today != d}">
 															<a href="${pageContext.request.contextPath}/on/CashbookOne?targetYear=${todayYear}&targetMonth=${todayMonth}&targetDay=${d}" style="color: #000000; text-decoration: none;">${d}</a>
+														</c:if>
 														</div>
 													</td>
 												</c:if>
@@ -398,7 +403,7 @@
             <footer class="sticky-footer bg-white">
                 <div class="container my-auto">
                     <div class="copyright text-center my-auto">
-                        <span>Copyright &copy; Your Website 2021</span>
+                        <span>Copyright &copy; jsd12541 2023</span>
                     </div>
                 </div>
             </footer>

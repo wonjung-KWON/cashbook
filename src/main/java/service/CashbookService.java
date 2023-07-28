@@ -51,7 +51,50 @@ public class CashbookService {
 				e2.printStackTrace();
 			}
 		}
-		// conn.commit();
+		
+		return row;
+	}
+	// 총 지출
+	public int totalUnMoney(String memberId) {
+		this.cashbookDao = new CashbookDao();
+		int row = 0;
+		Connection conn = null;
+		try {
+			// conn.setAutoCommit(false);
+			conn = DriverManager.getConnection("jdbc:mariadb://43.202.104.49:3306/cash","root","java1234");
+			row = cashbookDao.totalUnMoney(conn, memberId);
+		}catch (Exception e) {
+			// conn.rollback();
+			e.printStackTrace();
+		}finally {
+			try {
+				conn.close();
+			}catch (Exception e2) {
+				e2.printStackTrace();
+			}
+		}
+		
+		return row;
+	}
+	// 총 수입
+	public int totalMoney(String memberId) {
+		this.cashbookDao = new CashbookDao();
+		int row = 0;
+		Connection conn = null;
+		try {
+			// conn.setAutoCommit(false);
+			conn = DriverManager.getConnection("jdbc:mariadb://43.202.104.49:3306/cash","root","java1234");
+			row = cashbookDao.totalMoney(conn, memberId);
+		}catch (Exception e) {
+			// conn.rollback();
+			e.printStackTrace();
+		}finally {
+			try {
+				conn.close();
+			}catch (Exception e2) {
+				e2.printStackTrace();
+			}
+		}
 		
 		return row;
 	}
@@ -74,7 +117,6 @@ public class CashbookService {
 				e2.printStackTrace();
 			}
 		}
-		// conn.commit();
 		
 		return row;
 	}
@@ -97,7 +139,6 @@ public class CashbookService {
 				e2.printStackTrace();
 			}
 		}
-		// conn.commit();
 		
 		return list;
 	}
@@ -120,7 +161,6 @@ public class CashbookService {
 				e2.printStackTrace();
 			}
 		}
-		// conn.commit();
 		
 		return row;
 	}

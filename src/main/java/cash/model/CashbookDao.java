@@ -12,6 +12,7 @@ import cash.vo.Cashbook;
 import cash.vo.Member;
 
 public class CashbookDao {
+	
 	// 최근 기록 7개
 			public List<Cashbook> todayCashbook(Connection conn, String memberId, int targetYear, int targetMonth) {
 				List<Cashbook> list = new ArrayList<Cashbook>();
@@ -75,7 +76,59 @@ public class CashbookDao {
 				}
 				return list;
 			}
-	// 최고 지출
+	// 총 지출
+		public int totalUnMoney(Connection conn, String memberId) {
+			int row = 0;
+			PreparedStatement stmt = null;
+			ResultSet rs = null;
+			String sql = "select sum(price) price FROM cashbook WHERE member_id = ? AND category = '지출'";
+			try {
+				stmt = conn.prepareStatement(sql);
+				stmt.setString(1, memberId);
+				System.out.println(stmt +"<--stmt");
+				rs = stmt.executeQuery();
+				if(rs.next()) {
+					row = rs.getInt("price");
+				}
+			} catch (Exception e) {
+				e.printStackTrace();
+			} finally {
+				try {
+					rs.close();
+					stmt.close();
+				}catch (Exception e2) {
+					e2.printStackTrace();
+				}
+			}
+			return row;
+			}
+	// 총 수입
+		public int totalMoney(Connection conn, String memberId) {
+		int row = 0;
+		PreparedStatement stmt = null;
+		ResultSet rs = null;
+		String sql = "select sum(price) price FROM cashbook WHERE member_id = ? AND category = '수입'";
+		try {
+			stmt = conn.prepareStatement(sql);
+			stmt.setString(1, memberId);
+			System.out.println(stmt +"<--stmt");
+			rs = stmt.executeQuery();
+			if(rs.next()) {
+				row = rs.getInt("price");
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			try {
+				rs.close();
+				stmt.close();
+			}catch (Exception e2) {
+				e2.printStackTrace();
+			}
+		}
+		return row;
+		}
+	// 선택년도 월 최고 지출
 		public int selectMaxUnMoney(Connection conn, String memberId, int targetYear, int targetMonth) {
 			int row = 0;
 			PreparedStatement stmt = null;
