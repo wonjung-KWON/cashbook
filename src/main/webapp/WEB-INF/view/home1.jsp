@@ -22,10 +22,6 @@
 
     <!-- Custom styles for this template-->
     <link href="${pageContext.request.contextPath}/temp/css/sb-admin-2.min.css" rel="stylesheet">
-	<style>
-		td { height : 150px; width: 300px;}
-		glanlink {color: #000000; text-decoration: none;}
-	</style>
 </head>
 
 <body id="page-top">
@@ -49,24 +45,10 @@
 
             <!-- Nav Item - Dashboard -->
             <li class="nav-item active">
-                <a class="nav-link" href="${pageContext.request.contextPath}/on/calendar">
+                <a class="nav-link" href="${pageContext.request.contextPath}/on/home">
                     <i class="fas fa-fw fa-tachometer-alt"></i>
-                    <span>달력보기</span></a>
+                    <span>Home</span></a>
             </li>
-
-            <!-- Divider -->
-            <hr class="sidebar-divider">
-
-           
-
-
-            <!-- Divider -->
-            <hr class="sidebar-divider">
-
-            <!-- Heading -->
-            <div class="sidebar-heading">
-                가계부
-            </div>
 
             <!-- Nav Item - Pages Collapse Menu -->
             <li class="nav-item">
@@ -84,8 +66,13 @@
                     </div>
                 </div>
             </li>
-
-
+			<!-- Nav Item - Dashboard -->
+            <li class="nav-item active">
+                <a class="nav-link" href="${pageContext.request.contextPath}/on/addCashbook">
+                    <i class="fas fa-fw fa-tachometer-alt"></i>
+                    <span>가계부 작성하기</span></a>
+            </li>
+	
             <!-- Divider -->
             <hr class="sidebar-divider d-none d-md-block">
 
@@ -157,70 +144,36 @@
                 <div class="container-fluid">
 
                     <!-- Page Heading -->
-                    <h1 class="h3 mb-2 text-gray-800">${targetYear}년 ${targetMonth+1}월 가계부</h1>
-                    <a href = "${pageContext.request.contextPath}/on/calendar?targetYear=${targetYear}&targetMonth=${targetMonth-1}">이전달</a>
-					<a href = "${pageContext.request.contextPath}/on/calendar?targetYear=${targetYear}&targetMonth=${targetMonth+1}">다음달</a>
-
+                    <h1 class="h3 mb-2 text-gray-800">
+                    	${targetYear}년 ${targetMonth}월 가계부 
+					</h1>
+                    
                     <!-- DataTales Example -->
                     <div class="card shadow mb-4">
-                        <div class="card-header py-3">
-                            <h6 class="m-0 font-weight-bold text-primary">${targetMonth+1}월 해시태그
-                            	<c:forEach var="m" items="${htList}">
-									<a href="${pageContext.request.contextPath}/on/hashtagList?word=${m.word}" style="color: green; text-decoration: none;">${m.word}(${m.cnt})</a>
-								</c:forEach>
-                            </h6>
-                            
-                        </div>
                         <div class="card-body">
                             <div class="table-responsive">
-                            	<table class="table table-bordered">
+							 	<h1>${targetYear}년도 ${targetMonth+1}월 ${targetDay}일</h1>
+								<table class="table table-bordered">
 									<tr>
-										<td style="color: red; height: 30px;">일</td>
-										<td style="color: black; height: 30px;">월</td>
-										<td style="color: black; height: 30px;">화</td>
-										<td style="color: black; height: 30px;">수</td>
-										<td style="color: black; height: 30px;">목</td>
-										<td style="color: black; height: 30px;">금</td>
-										<td style="color: blue; height: 30px;">토</td>
+										<th>번호</th>
+										<th>지출/수입</th>
+										<th>지출날짜</th>
+										<th>가격</th>
+										<th>메모</th>
+										<th>수정날짜</th>
+										<th>생성날짜</th>
 									</tr>
-									<tr>
-										<c:forEach var="i" begin="0" end="${totalCell-1}" step="1">
-											<c:set var="d" value="${i-beginBlank+1}"/>
-										
-											<c:if test="${i != 0 && i%7 == 0}">
-												</tr><tr>
-											</c:if>
-											
-											<c:if test="${d<1}">
-												<td>${preLastDate - beginBlank + i + 1}</td>
-											</c:if>
-											<c:if test="${d > lastDate}">
-												<td>${i - lastDate - beginBlank + 1}</td>
-											</c:if>
-											
-											<c:if test="${!(d<1 || d > lastDate)}">
-												
-												
-												<td><div><a href="${pageContext.request.contextPath}/on/CashbookOne?targetYear=${targetYear}&targetMonth=${targetMonth}&targetDay=${d}" style="color: #000000; text-decoration: none;">${d}</a></div>
-													
-													
-													<c:forEach var="c" items="${list}">
-														<c:if test="${d == fn:substring(c.cashbookDate, 8, 10)}">
-															<div>
-																<c:if test="${c.category == '수입'}">
-																	<span style="color:blue;">+${c.price}</span>
-																</c:if>
-																<c:if test="${c.category == '지출'}">
-																	<span style="color:red;">-${c.price}</span>
-																</c:if>
-															</div>
-														</c:if>
-													</c:forEach>
-												</td>
-											
-											</c:if>
-										</c:forEach>
-									</tr>
+									<c:forEach var="c" items="${list}">
+										<tr>
+											<td><span>${c.cashbookNo}</span></td>
+											<td><span>${c.category}</span></td>
+											<td><span>${c.cashbookDate}</span></td>
+											<td><span>${c.price}</span></td>
+											<td><span>${c.memo}</span></td>
+											<td><span>${c.updatedate}</span></td>
+											<td><span>${c.createdate}</span></td>
+										</tr>
+									</c:forEach>
 								</table>
                             </div>
                         </div>
@@ -236,7 +189,7 @@
             <footer class="sticky-footer bg-white">
                 <div class="container my-auto">
                     <div class="copyright text-center my-auto">
-                        <span>Copyright &copy; Your Website 2021</span>
+                        <span>Copyright &copy; jsd12541 2023</span>
                     </div>
                 </div>
             </footer>
