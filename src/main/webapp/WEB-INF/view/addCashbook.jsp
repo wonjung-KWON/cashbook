@@ -137,9 +137,11 @@
                 </a>
                 <div id="collapsePages" class="collapse" aria-labelledby="headingPages" data-parent="#accordionSidebar">
                     <div class="bg-white py-2 collapse-inner rounded">
-                        <h6 class="collapse-header">로그인 관련</h6>
-                        <a class="collapse-item" href="${pageContext.request.contextPath}/off/login">로그인</a>
-                        <a class="collapse-item" href="${pageContext.request.contextPath}/off/AddMemberController">회원가입</a>
+                        <h6 class="collapse-header">회원관련</h6>
+                        <c:if test="${loginMember == null}">
+ 	                       <a class="collapse-item" href="${pageContext.request.contextPath}/off/login">로그인</a>
+    	                   <a class="collapse-item" href="${pageContext.request.contextPath}/off/AddMemberController">회원가입</a>
+                        </c:if>
                         <a class="collapse-item" href="${pageContext.request.contextPath}/on/modifyMember">회원정보수정</a>
                     </div>
                 </div>
@@ -287,7 +289,7 @@
         <div class="modal-dialog" role="document">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel">Ready to Leave?</h5>
+                    <h5 class="modal-title" id="exampleModalLabel">모든 일정을 작성하셨나요?</h5>
                     <button class="close" type="button" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">×</span>
                     </button>

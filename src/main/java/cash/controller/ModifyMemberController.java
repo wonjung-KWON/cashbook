@@ -29,7 +29,7 @@ public class ModifyMemberController extends HttpServlet {
 		String ckPw = request.getParameter("ckPw");
 		if(!memberPw.equals(ckPw)) {
 			System.out.println("두개의 비밀번호가 같지않음");
-			response.sendRedirect(request.getContextPath()+"/on/modifyMember");
+			response.sendRedirect(request.getContextPath()+"/on/memberOne");
 			return;
 		}
 		Member member = new Member();
@@ -40,13 +40,13 @@ public class ModifyMemberController extends HttpServlet {
 		int row = memberService.checkPw(member);
 		if(row == 0) {
 			System.out.println("비밀번호 틀림");
-			response.sendRedirect(request.getContextPath()+"/on/modifyMember");
+			response.sendRedirect(request.getContextPath()+"/on/memberOne");
 			return;
 		} else if(row == 1) {
 			int row2 = memberService.modifyMember(memberId, memberPw);
 			if(row2 == 0) {
 				System.out.println("회원변경실패");
-				response.sendRedirect(request.getContextPath()+"/on/modifyMember");
+				response.sendRedirect(request.getContextPath()+"/on/memberOne");
 				return;
 			} else if(row2 == 1) {
 				System.out.println("회원변경성공");
@@ -54,7 +54,7 @@ public class ModifyMemberController extends HttpServlet {
 				return;
 			}else {
 				System.out.println("에러");
-				response.sendRedirect(request.getContextPath()+"/on/modifyMember");
+				response.sendRedirect(request.getContextPath()+"/on/memberOne");
 			}
 		}
 	}

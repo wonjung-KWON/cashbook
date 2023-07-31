@@ -22,8 +22,33 @@
 
     <!-- Custom styles for this template-->
     <link href="${pageContext.request.contextPath}/temp/css/sb-admin-2.min.css" rel="stylesheet">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+     <script>
+	 $(function(){
+	    	//시작하자마자 숨기기
+			$('#myElement').toggle();
+	 });
+	 $(document).ready(function() {
+	      // 숨기기/보이기 버튼 클릭 시 실행할 코드
+	       $('#toggleButton').click(function() {
+	        // #myElement 요소의 숨김/보임 상태를 토글합니다.
+	        $('#byElement').toggle();
+	        $('#myElement').toggle();
+	        $('#toggleButton').toggle();
+	        
+			});
+	       $('#toggle2Button').click(function() {
+		          // #myElement 요소의 숨김/보임 상태를 토글합니다.
+		          $('#myElement').toggle();
+		          $('#byElement').toggle();
+		          $('#toggleButton').toggle();
+			});
+	 });
+	 </script>
 </head>
-
+<style>
+	td{text-align: center;"}
+</style>
 <body id="page-top">
 
     <!-- Page Wrapper -->
@@ -59,9 +84,11 @@
                 </a>
                 <div id="collapsePages" class="collapse" aria-labelledby="headingPages" data-parent="#accordionSidebar">
                     <div class="bg-white py-2 collapse-inner rounded">
-                        <h6 class="collapse-header">로그인 관련</h6>
-                        <a class="collapse-item" href="${pageContext.request.contextPath}/off/login">로그인</a>
-                        <a class="collapse-item" href="${pageContext.request.contextPath}/off/AddMemberController">회원가입</a>
+                        <h6 class="collapse-header">회원관련</h6>
+                        <c:if test="${loginMember == null}">
+ 	                       <a class="collapse-item" href="${pageContext.request.contextPath}/off/login">로그인</a>
+    	                   <a class="collapse-item" href="${pageContext.request.contextPath}/off/AddMemberController">회원가입</a>
+                        </c:if>
                         <a class="collapse-item" href="${pageContext.request.contextPath}/on/modifyMember">회원정보수정</a>
                     </div>
                 </div>
@@ -145,36 +172,66 @@
 
                     <!-- Page Heading -->
                     <h1 class="h3 mb-2 text-gray-800">
-                    	${targetYear}년 ${targetMonth}월 가계부 
+                    	회원정보
 					</h1>
                     
                     <!-- DataTales Example -->
                     <div class="card shadow mb-4">
                         <div class="card-body">
                             <div class="table-responsive">
-							 	<h1>${targetYear}년도 ${targetMonth+1}월 ${targetDay}일</h1>
+							 	<h1>${loginMember}</h1>
 								<table class="table table-bordered">
 									<tr>
-										<th>번호</th>
-										<th>지출/수입</th>
-										<th>지출날짜</th>
-										<th>가격</th>
-										<th>메모</th>
-										<th>수정날짜</th>
-										<th>생성날짜</th>
+										<td>아이디</td>
+										<td>${member.memberId}</td>
+										<td></td>
 									</tr>
-									<c:forEach var="c" items="${list}">
-										<tr>
-											<td><span>${c.cashbookNo}</span></td>
-											<td><span>${c.category}</span></td>
-											<td><span>${c.cashbookDate}</span></td>
-											<td><span>${c.price}</span></td>
-											<td><span>${c.memo}</span></td>
-											<td><span>${c.updatedate}</span></td>
-											<td><span>${c.createdate}</span></td>
-										</tr>
-									</c:forEach>
+									<tr>
+										<td>패스워드</td>
+										<td>
+											<div id="byElement">********</div>
+											<div id="myElement">
+											<form action="${pageContext.request.contextPath}/on/modifyMember" method="post" id="pwForm">
+												<p>현재 비밀번호</p>
+												<input type="password" name="checkPw" placeholder="현재 비밀번호 입력" required="required"><br>
+												
+												<p>변경할 비밀번호</p>
+												<input type="password" name="memberPw" placeholder="비밀번호" required="required"><br>
+							
+												<p>변경할 비밀번호 확인</p>
+												<input type="password" name="ckPw" placeholder="비밀번호 재확인" required="required"><br>
+												
+												<button type="button" id="toggle2Button">취소</button>
+												<button type="submit">완료</button>
+											</form>
+											</div>
+										</td>
+										<td style=" text-align: center;  vertical-align: middle;">
+											<button id="toggleButton" type="button" class="styled-linke">비밀번호 변경</button>
+										</td>
+									</tr>
+									<tr>
+										<td>회원이름</td>
+										<td>${member.memberName}</td>
+										<td></td>
+									</tr>
+									<tr>
+										<td>전화번호</td>
+										<td>${member.memberPhone}</td>
+										<td></td>
+									</tr>
+									<tr>
+										<td>생성일</td>
+										<td>${member.createdate}</td>
+										<td></td>
+									</tr>
+									<tr>
+										<td>수정일</td>
+										<td>${member.updatedate}</td>
+										<td></td>
+									</tr>
 								</table>
+								<a href="${pageContext.request.contextPath}/on/RemoveMemberController">회원탈퇴</a>
                             </div>
                         </div>
                     </div>
@@ -206,7 +263,7 @@
         <div class="modal-dialog" role="document">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel">Ready to Leave?</h5>
+                <h5 class="modal-title" id="exampleModalLabel">모든 일정을 작성하셨나요?</h5>
                     <button class="close" type="button" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">×</span>
                     </button>

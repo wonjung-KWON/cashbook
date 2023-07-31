@@ -61,16 +61,18 @@
                 </a>
                 <div id="collapsePages" class="collapse" aria-labelledby="headingPages" data-parent="#accordionSidebar">
                     <div class="bg-white py-2 collapse-inner rounded">
-                        <h6 class="collapse-header">로그인 관련</h6>
-                        <a class="collapse-item" href="${pageContext.request.contextPath}/off/login">로그인</a>
-                        <a class="collapse-item" href="${pageContext.request.contextPath}/off/AddMemberController">회원가입</a>
+                        <h6 class="collapse-header">회원관련</h6>
+                        <c:if test="${loginMember == null}">
+ 	                       <a class="collapse-item" href="${pageContext.request.contextPath}/off/login">로그인</a>
+    	                   <a class="collapse-item" href="${pageContext.request.contextPath}/off/AddMemberController">회원가입</a>
+                        </c:if>
                         <a class="collapse-item" href="${pageContext.request.contextPath}/on/modifyMember">회원정보수정</a>
                     </div>
                 </div>
             </li>
 			<!-- Nav Item - Dashboard -->
             <li class="nav-item active">
-                <a class="nav-link" href="${pageContext.request.contextPath}/on/addCashbook">
+                <a class="nav-link" href="${pageContext.request.contextPath}/on/addCashbook?targetYear=${targetYear}&targetMonth=${targetMonth+1}&targetDay=${targetDay}">
                     <i class="fas fa-fw fa-tachometer-alt"></i>
                     <span>가계부 작성하기</span></a>
             </li>
@@ -147,7 +149,7 @@
 
                     <!-- Page Heading -->
                     <h1 class="h3 mb-2 text-gray-800">
-                    	${targetYear}년 ${targetMonth}월 가계부 
+                    	${targetYear}년 ${targetMonth+1}월 가계부 
 					</h1>
                     
                     <!-- DataTales Example -->
@@ -208,7 +210,7 @@
         <div class="modal-dialog" role="document">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel">Ready to Leave?</h5>
+                    <h5 class="modal-title" id="exampleModalLabel">모든 일정을 작성하셨나요?</h5>
                     <button class="close" type="button" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">×</span>
                     </button>

@@ -28,6 +28,7 @@ public class MemberOneController extends HttpServlet {
 		// member 출력하는 (포워딩대상)memberOne.jsp 에도 공유되어야한다.
 		//request가 공유되니 request안에 넣어서 공유
 		request.setAttribute("member", member);
+		request.setAttribute("loginMember", loginMember);
 		
 		// memberOne.jsp 포워딩
 		request.getRequestDispatcher("/WEB-INF/view/memberOne.jsp").forward(request, response);
