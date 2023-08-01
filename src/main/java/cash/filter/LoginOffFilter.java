@@ -24,7 +24,7 @@ public class LoginOffFilter extends HttpFilter implements Filter {
 		//만약 로그인 되어있다면 cashbook으로 리다이렉트
 		if(session.getAttribute("loginMember") != null) {
 			HttpServletResponse rep = (HttpServletResponse)response;
-			rep.sendRedirect(req.getContextPath()+"/on/cashbook");
+			rep.sendRedirect(req.getContextPath()+"/on/home");
 			return;
 		}
 		

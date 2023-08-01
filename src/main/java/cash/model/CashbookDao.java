@@ -12,6 +12,28 @@ import cash.vo.Cashbook;
 import cash.vo.Member;
 
 public class CashbookDao {
+	// cashbook 삭제 
+	public int deleteCashbook(Connection conn, int cashbookNo, String memberId) {
+		int row = 0;
+		PreparedStatement stmt = null;
+		String sql = "DELETE FROM cashbook WHERE member_id = ? AND cashbook_no = ?";
+		try {
+			stmt = conn.prepareStatement(sql);
+			stmt.setString(1, memberId);
+			stmt.setInt(2, cashbookNo);
+			System.out.println(stmt +"<--stmt");
+			row = stmt.executeUpdate();
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			try {
+				stmt.close();
+			}catch (Exception e2) {
+				e2.printStackTrace();
+			}
+		}
+		return row;
+	}
 	
 	// 최근 기록 7개
 			public List<Cashbook> todayCashbook(Connection conn, String memberId, int targetYear, int targetMonth) {

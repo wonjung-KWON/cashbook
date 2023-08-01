@@ -32,6 +32,27 @@ public class CashbookService {
 		}
 		return list;
 	}
+	// cashbook 삭제
+	public int deleteCashbook(int cashbookNo, String memberId) {
+		this.cashbookDao = new CashbookDao();
+		int row = 0;
+		Connection conn = null;
+		try {
+			// conn.setAutoCommit(false);
+			conn = DriverManager.getConnection("jdbc:mariadb://43.202.104.49:3306/cash","root","java1234");
+			row = cashbookDao.deleteCashbook(conn, cashbookNo, memberId);
+		}catch (Exception e) {
+			// conn.rollback();
+			e.printStackTrace();
+		}finally {
+			try {
+				conn.close();
+			}catch (Exception e2) {
+				e2.printStackTrace();
+			}
+		}
+		return row;
+	}
 	//현재달 최고 수입
 	public int selectMaxMoney(String memberId, int targetYear, int targetMonth) {
 		this.cashbookDao = new CashbookDao();

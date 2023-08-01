@@ -36,13 +36,7 @@ public class AddCashbookController extends HttpServlet {
 	}
 	@Override
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		request.setCharacterEncoding("utf-8");//post인코딩 처리
-		//session유효성 검사
-				HttpSession session = request.getSession();
-				if(session.getAttribute("loginMember") == null) {
-					response.sendRedirect(request.getContextPath()+"/off/login");
-					return;
-				}	
+		HttpSession session = request.getSession();
 		//request 매개값
 		String memberId = (String) session.getAttribute("loginMember");
 		String category = request.getParameter("category");
