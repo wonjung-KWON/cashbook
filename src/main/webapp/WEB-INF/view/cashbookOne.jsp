@@ -85,7 +85,7 @@ td {
 								href="${pageContext.request.contextPath}/off/AddMemberController">회원가입</a>
 						</c:if>
 						<a class="collapse-item"
-							href="${pageContext.request.contextPath}/on/modifyMember">회원정보수정</a>
+							href="${pageContext.request.contextPath}/on/memberOne">회원정보</a>
 					</div>
 				</div></li>
 			<!-- Nav Item - Dashboard -->

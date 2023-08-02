@@ -105,13 +105,9 @@ td {
 								href="${pageContext.request.contextPath}/off/AddMemberController">회원가입</a>
 						</c:if>
 						<a class="collapse-item"
-							href="${pageContext.request.contextPath}/on/modifyMember">회원정보수정</a>
+							href="${pageContext.request.contextPath}/on/memberOne">회원정보</a>
 					</div>
 				</div></li>
-			<!-- Nav Item - Dashboard -->
-			<li class="nav-item active"><a class="nav-link"
-				href="${pageContext.request.contextPath}/on/addCashbook"> <i
-					class="fas fa-fw fa-tachometer-alt"></i> <span>가계부 작성하기</span></a></li>
 
 			<!-- Divider -->
 			<hr class="sidebar-divider d-none d-md-block">
@@ -162,11 +158,7 @@ td {
 								<a class="dropdown-item"
 									href="${pageContext.request.contextPath}/on/memberOne"> <i
 									class="fas fa-user fa-sm fa-fw mr-2 text-gray-400"></i> 프로필 정보
-								</a> <a class="dropdown-item"
-									href="${pageContext.request.contextPath}/on/modifyMember">
-									<i class="fas fa-cogs fa-sm fa-fw mr-2 text-gray-400"></i> 회원
-									설정
-								</a>
+								</a> 
 								<div class="dropdown-divider"></div>
 								<c:if test="${memberId != null || memberId != ''}">
 									<a class="dropdown-item"

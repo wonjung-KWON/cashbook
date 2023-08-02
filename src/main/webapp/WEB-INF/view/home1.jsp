@@ -6,7 +6,6 @@
 <html lang="en">
 
 <head>
-
 <meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport"
@@ -28,6 +27,19 @@
 <link
 	href="${pageContext.request.contextPath}/temp/css/sb-admin-2.min.css"
 	rel="stylesheet">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
+<script>
+$(document).ready(function(){
+	$('#btn').click(function(){
+		if($('#checkPw').val().length < 1){
+			alert('비밀번호를 입력바랍니다');
+			return;
+		}else{
+			$('#removeForm').submit();
+		}
+	});
+});
+</script>
 </head>
 <style>
 td {
@@ -167,43 +179,20 @@ td {
 					<div class="card shadow mb-4">
 						<div class="card-body">
 							<div class="table-responsive">
-								<h2>해시태그 ${word} 리스트</h2>
-								<table>
-									<tr>
-										<th>지출/수입</th>
-										<th>가격</th>
-										<th>변동날짜</th>
-										<th>메모</th>
-										<th>생성날짜</th>
-										<th>수정날짜</th>
-									</tr>
-									<c:forEach var="h" items="${list}">
+								<h2>회원탈퇴</h2>
+											<form action="${pageContext.request.contextPath}/on/RemoveMemberController" method="post" id="removeForm">
+								<table class="table table-bordered">
 										<tr>
-											<td>${h.category}</td>
-											<td>${h.price}</td>
-											<td><a
-												href="${pageContext.request.contextPath}/on/CashbookOne?cashbookDate=${h.cashbookDate}">${h.cashbookDate}</a></td>
-											<td>${h.memo}</td>
-											<td>${h.createdate}</td>
-											<td>${h.updatedate}</td>
+											<td>
+													비밀번호 입력 :
+											</td>
+											<td>
+												<input type="password" name="memberPw" id="checkPw" placeholder="비밀번호">
+											</td>
 										</tr>
-									</c:forEach>
 								</table>
-								<div>
-									<c:if test="${startPage > 5}">
-										<a
-											href="${pageContext.request.contextPath}/on/hashtagList?currentPage=${startPage-1}&word=${word}">이전</a>
-									</c:if>
-									<c:forEach var="i" begin="${startPage}" end="${endPage}"
-										step="1">
-										<a
-											href="${pageContext.request.contextPath}/on/hashtagList?currentPage=${i}&word=${word}">${i}</a>
-									</c:forEach>
-									<c:if test="${endPage<lastPage}">
-										<a
-											href="${pageContext.request.contextPath}/on/hashtagList?currentPage=${endPage+1}&word=${word}">다음</a>
-									</c:if>
-								</div>
+													<button type="button" id="btn">탈퇴</button>
+												</form>
 							</div>
 						</div>
 					</div>

@@ -82,14 +82,9 @@ td {
 								href="${pageContext.request.contextPath}/off/AddMemberController">회원가입</a>
 						</c:if>
 						<a class="collapse-item"
-							href="${pageContext.request.contextPath}/on/modifyMember">회원정보수정</a>
+							href="${pageContext.request.contextPath}/on/memberOne">회원정보</a>
 					</div>
 				</div></li>
-			<!-- Nav Item - Dashboard -->
-			<li class="nav-item active"><a class="nav-link"
-				href="${pageContext.request.contextPath}/on/addCashbook?targetYear=${targetYear}&targetMonth=${targetMonth+1}&targetDay=${targetDay}">
-					<i class="fas fa-fw fa-tachometer-alt"></i> <span>가계부 작성하기</span>
-			</a></li>
 
 			<!-- Divider -->
 			<hr class="sidebar-divider d-none d-md-block">

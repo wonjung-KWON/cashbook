@@ -24,6 +24,6 @@ public class DeleteCashbook extends HttpServlet{
 	//request에 쿼리 실행값 보내기
 	request.setAttribute("row", row);
 	
-	request.getRequestDispatcher("/WEB-INF/view/cashbookOne.jsp").forward(request, response);
+	request.getRequestDispatcher("/WEB-INF/view/calendar.jsp").forward(request, response);
 	}
 }
