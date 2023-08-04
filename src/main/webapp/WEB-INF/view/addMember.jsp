@@ -128,9 +128,7 @@
 									id="addMemberBtn" type="button">회원가입</button>
 								<hr>
 								<a href="${pageContext.request.contextPath}/off/login"
-									class="btn btn-google btn-user btn-block"> 로그인 하기 </a> <a
-									href="${pageContext.request.contextPath}/on/home"
-									class="btn btn-facebook btn-user btn-block"> HOME </a>
+									class="btn btn-google btn-user btn-block"> 로그인 하기 </a>
 							</form>
 							<hr>
 						</div>

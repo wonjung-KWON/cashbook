@@ -86,7 +86,6 @@
                                         <button type="button" class="btn btn-primary btn-user btn-block" id="loginBtn">
                                             Login
                                         </button>
-                                        <hr>
                                     </form>
                                     <hr>
                                     <div class="text-center">
