@@ -2,6 +2,7 @@
 	pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -87,7 +88,7 @@
 											value="${totalSumIncome + c.price}" />
 										<!-- 합을 누적합니다 -->
 									</c:if>
-								</c:forEach> <span style="color: blue;">총 합: ${totalSumIncome}</span> <!-- 총 합을 표시합니다 -->
+								</c:forEach> <span style="color: blue;">총 :<fmt:formatNumber value="${totalSumIncome}" pattern="#,###"/>원</span> <!-- 총 합을 표시합니다 -->
 							</td>
 						</tr>
 						<tr>
@@ -100,7 +101,7 @@
 											value="${totalSumExpense + c.price}" />
 										<!-- 합을 누적합니다 -->
 									</c:if>
-								</c:forEach> <span style="color: red;">총 합: ${totalSumExpense}</span> <!-- 총 합을 표시합니다 -->
+								</c:forEach> <span style="color: red;">총 :<fmt:formatNumber value="${totalSumExpense}" pattern="#,###"/>원</span> <!-- 총 합을 표시합니다 -->
 							</td>
 						</tr>
 					</table>
@@ -226,7 +227,7 @@
 											<div
 												class="text-xs font-weight-bold text-primary text-uppercase mb-1">
 												이번달 최고 수입</div>
-											<div class="h5 mb-0 font-weight-bold text-gray-800">${maxMoney}원</div>
+											<div class="h5 mb-0 font-weight-bold text-gray-800"><fmt:formatNumber value="${maxMoney}" pattern="#,###"/>원</div>
 										</div>
 										<div class="col-auto">
 											<i class="fas fa-dollar-sign fa-2x text-gray-300"></i>
@@ -245,7 +246,7 @@
 											<div
 												class="text-xs font-weight-bold text-success text-uppercase mb-1">
 												이번달 최고 지출</div>
-											<div class="h5 mb-0 font-weight-bold text-gray-800">${maxUnMoney}원</div>
+											<div class="h5 mb-0 font-weight-bold text-gray-800"><fmt:formatNumber value="${maxUnMoney}" pattern="#,###"/>원</div>
 										</div>
 										<div class="col-auto">
 											<i class="fas fa-dollar-sign fa-2x text-gray-300"></i>
@@ -266,7 +267,7 @@
 												자산</div>
 											<div class="row no-gutters align-items-center">
 												<div class="col-auto">
-													<div class="h5 mb-0 mr-3 font-weight-bold text-gray-800">${totalM}원</div>
+													<div class="h5 mb-0 mr-3 font-weight-bold text-gray-800"><fmt:formatNumber value="${totalM}" pattern="#,###"/>원</div>
 												</div>
 											</div>
 										</div>
@@ -289,7 +290,7 @@
 												마지막 수입</div>
 											<div class="h5 mb-0 font-weight-bold text-gray-800">
 
-												<h6>${lastPrice}: ${lastDay}</h6>
+												<h6>${lastDay} : <fmt:formatNumber value="${lastPrice}" pattern="#,###"/>원</h6>
 
 											</div>
 										</div>
@@ -415,7 +416,7 @@
 								<br>
 								<c:forEach var="n" items="${cList}">
 									<span style="text-align: center;">거래내역 : ${n.category} :
-										${n.price}원 ${fn:substring(n.cashbookDate, 5, 10)}</span>
+										 ${fn:substring(n.cashbookDate, 5, 10)}일 <fmt:formatNumber value="${n.price}" pattern="#,###"/>원</span>
 									<br>
 								</c:forEach>
 							</div>

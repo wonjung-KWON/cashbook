@@ -2,6 +2,7 @@
 	pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -175,7 +176,7 @@ td {
 									<c:forEach var="h" items="${list}">
 										<tr>
 											<td>${h.category}</td>
-											<td>${h.price}</td>
+											<td><fmt:formatNumber value="${h.price}" pattern="#,###"/>원</td>
 											<td><a
 												href="${pageContext.request.contextPath}/on/CashbookOne?cashbookDate=${h.cashbookDate}">${h.cashbookDate}</a></td>
 											<td>${h.memo}</td>

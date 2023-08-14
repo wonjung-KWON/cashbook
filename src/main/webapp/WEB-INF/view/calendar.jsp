@@ -2,6 +2,7 @@
 	pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -182,7 +183,7 @@ glanlink {
 											<div
 												class="text-xs font-weight-bold text-primary text-uppercase mb-1">
 												${targetMonth+1}월 최고 수입</div>
-											<div class="h5 mb-0 font-weight-bold text-gray-800">${maxMoney}원</div>
+											<div class="h5 mb-0 font-weight-bold text-gray-800"><fmt:formatNumber value="${maxMoney}" pattern="#,###"/>원</div>
 										</div>
 										<div class="col-auto">
 											<i class="fas fa-dollar-sign fa-2x text-gray-300"></i>
@@ -201,7 +202,7 @@ glanlink {
 											<div
 												class="text-xs font-weight-bold text-success text-uppercase mb-1">
 												${targetMonth+1}월 최고 지출</div>
-											<div class="h5 mb-0 font-weight-bold text-gray-800">${maxUnMoney}원</div>
+											<div class="h5 mb-0 font-weight-bold text-gray-800"><fmt:formatNumber value="${maxUnMoney}" pattern="#,###"/>원</div>
 										</div>
 										<div class="col-auto">
 											<i class="fas fa-dollar-sign fa-2x text-gray-300"></i>
@@ -222,7 +223,7 @@ glanlink {
 												자산</div>
 											<div class="row no-gutters align-items-center">
 												<div class="col-auto">
-													<div class="h5 mb-0 mr-3 font-weight-bold text-gray-800">${totalM}원</div>
+													<div class="h5 mb-0 mr-3 font-weight-bold text-gray-800"><fmt:formatNumber value="${totalM}" pattern="#,###"/>원</div>
 												</div>
 											</div>
 										</div>
@@ -245,7 +246,7 @@ glanlink {
 												${targetMonth+1}월 마지막 수입</div>
 											<div class="h5 mb-0 font-weight-bold text-gray-800">
 
-												<h6>${lastPrice}: ${lastDay}</h6>
+												<h6>${lastDay} : <fmt:formatNumber value="${lastPrice}" pattern="#,###"/>원</h6>
 
 											</div>
 										</div>
@@ -310,10 +311,10 @@ glanlink {
 													<c:if test="${d == fn:substring(c.cashbookDate, 8, 10)}">
 														<div>
 															<c:if test="${c.category == '수입'}">
-																<span style="color: blue;">+${c.price}</span>
+																<span style="color: blue; font-size:14px;">+<fmt:formatNumber value="${c.price}" pattern="#,###"/>원</span>
 															</c:if>
 															<c:if test="${c.category == '지출'}">
-																<span style="color: red;">-${c.price}</span>
+																<span style="color: red; font-size:14px;">-<fmt:formatNumber value="${c.price}" pattern="#,###"/>원</span>
 															</c:if>
 														</div>
 													</c:if>

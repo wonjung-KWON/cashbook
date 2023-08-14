@@ -2,6 +2,7 @@
 	pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -188,7 +189,7 @@ td {
 											<td><span>${c.cashbookNo}</span></td>
 											<td><span>${c.category}</span></td>
 											<td><span>${c.cashbookDate}</span></td>
-											<td><span>${c.price}</span></td>
+											<td><span><fmt:formatNumber value="${c.price}" pattern="#,###"/>원</span></td>
 											<td><span>${c.memo}</span></td>
 											<td><span>${c.updatedate}</span></td>
 											<td><span>${c.createdate}</span></td>
